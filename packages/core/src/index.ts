@@ -23,6 +23,8 @@ export {
   unescapeCell,
 } from "./emit.js";
 export { emitSiteIndex, type SiteIndexEntry } from "./siteindex.js";
+export { parseSibling, type ParsedSibling, type ParsedChunk } from "./sibling.js";
+export { validateSibling, type Finding, type ValidationResult } from "./validate.js";
 export { sha256Hex } from "./sha256.js";
 export { isValidId, slugify, SlugDeduper } from "./slug.js";
 export {
