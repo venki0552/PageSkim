@@ -1,0 +1,38 @@
+name: Bug report
+description: Something in the generator, validator, SDK, or playground misbehaves
+labels: [bug]
+body:
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      options:
+        - core
+        - generator (CLI)
+        - validator (CLI)
+        - sdk (browser)
+        - playground
+        - bench
+        - spec / docs
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you run, what did you expect, what did you get instead?
+    validations:
+      required: true
+  - type: textarea
+    id: input
+    attributes:
+      label: Minimal input HTML (or URL)
+      description: The smallest page that reproduces the problem. Paste HTML in a code block if possible — most bugs here are input-shaped.
+      render: html
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      placeholder: e.g. @agentpage/generator 0.1.0, Node 22.4
+    validations:
+      required: true

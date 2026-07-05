@@ -1,0 +1,37 @@
+name: Spec change (RFC)
+description: Propose a normative change to the AgentPage format (spec/SPEC.md)
+labels: [spec, rfc]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Spec changes follow the RFC process in CONTRIBUTING.md: this issue, a ≥7-day
+        discussion period for non-trivial changes, then a PR updating the spec text,
+        JSON Schema, changelog, and worked example together.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem with the current format
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: Proposed normative change
+      description: Exact wording or grammar changes where possible.
+    validations:
+      required: true
+  - type: textarea
+    id: compat
+    attributes:
+      label: Backward-compatibility impact
+      description: What happens to existing sibling files, generators, and validators? Is this a minor or patch bump?
+    validations:
+      required: true
+  - type: textarea
+    id: tooling
+    attributes:
+      label: Required tooling changes
+      description: How must generator/validator/SDK behavior change?
+    validations:
+      required: true
