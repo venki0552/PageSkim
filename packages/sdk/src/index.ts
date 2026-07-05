@@ -1,20 +1,31 @@
 /**
- * @pageskim/sdk — framework-free browser entry point for PageSkim.
+ * pageskim — make any web page readable by LLMs and agents at 10-50x fewer
+ * tokens. ESM entry point (bundlers/Node). For plain <script> use, see
+ * dist/pageskim.min.js (global `PageSkim`).
  *
- * Phase 4B delivers the full surface (fromHTML, fromDocument, savings,
- * expose, the <pageskim-badge> element) plus ESM/UMD bundles.
- *
- * Must stay SSR-safe: no window/document access at import time.
+ * SSR-safe: importing this module touches no browser globals.
  */
 
-export { SPEC_VERSION, TOKENIZER_LABEL, budgetUnits } from "@pageskim/core";
+export {
+  expose,
+  fromDocument,
+  fromHTML,
+  hasTokenizer,
+  loadTokenizer,
+  PageSkimError,
+  registerTokenizer,
+  savings,
+  SPEC_VERSION,
+  tokenBasis,
+  tokenCount,
+  type DocumentLike,
+  type ExposableDocument,
+  type FromHtmlOptions,
+  type PageSkimResult,
+  type Savings,
+  type SiblingDoc,
+  type TokenReport,
+  type Warning,
+} from "./api.js";
 
-import { budgetUnits } from "@pageskim/core";
-
-/**
- * Count tokens in a string. Uses the budget-metric estimate unless a real
- * tokenizer has been registered (Phase 4B adds registerTokenizer()).
- */
-export function tokenCount(text: string): number {
-  return budgetUnits(text);
-}
+export { definePageskimBadge } from "./badge.js";

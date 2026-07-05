@@ -12,7 +12,7 @@
     "apps/*"
   ],
   "scripts": {
-    "build": "npm run build -w @pageskim/core && npm run build -w @pageskim/generator -w @pageskim/validator -w @pageskim/sdk",
+    "build": "npm run build -w @pageskim/core && npm run build -w @pageskim/generator -w @pageskim/validator -w pageskim",
     "pretest": "npm run build",
     "test": "npm run test --workspaces --if-present",
     "lint": "eslint .",

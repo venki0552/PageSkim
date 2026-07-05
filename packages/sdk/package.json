@@ -1,7 +1,7 @@
 {
-  "name": "@pageskim/sdk",
+  "name": "pageskim",
   "version": "0.0.0",
-  "description": "Framework-free browser SDK for PageSkim: ESM + UMD builds of @pageskim/core for <script>/CDN use in any web page. Full API lands in Phase 4B.",
+  "description": "Make any web page readable by LLMs and agents at 10-50x fewer tokens. Browser SDK (ESM + <script> builds) and CLI for the PageSkim static sibling-file format.",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -12,15 +12,25 @@
       "default": "./dist/index.js"
     }
   },
+  "bin": {
+    "pageskim": "./dist/cli.js"
+  },
   "files": [
-    "dist"
+    "dist",
+    "fixtures/demo.html"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "test": "vitest run",
+    "build": "tsup",
+    "test": "npm run build && vitest run",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@pageskim/core": "0.0.0"
+    "@pageskim/core": "0.0.0",
+    "@pageskim/generator": "0.0.0",
+    "@pageskim/validator": "0.0.0",
+    "gpt-tokenizer": "^3.0.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.0"
   }
 }
