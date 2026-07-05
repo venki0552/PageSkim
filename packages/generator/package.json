@@ -1,7 +1,7 @@
 {
   "name": "@pageskim/generator",
-  "version": "0.0.0",
-  "description": "CLI wrapper around @pageskim/core: pageskim generate <file|dir|-> — emits .llm.md/.llm.json sibling files.",
+  "version": "0.1.0",
+  "description": "CLI wrapper around @pageskim/core: pageskim generate <file|dir|-> \u2014 emits .llm.md/.llm.json sibling files.",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -18,6 +18,25 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@pageskim/core": "0.0.0"
-  }
+    "@pageskim/core": "0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pageskim/pageskim.git",
+    "directory": "packages/generator"
+  },
+  "homepage": "https://github.com/pageskim/pageskim#readme",
+  "bugs": {
+    "url": "https://github.com/pageskim/pageskim/issues"
+  },
+  "keywords": [
+    "llm",
+    "agents",
+    "tokens",
+    "markdown",
+    "llms-txt",
+    "seo",
+    "ai",
+    "pageskim"
+  ]
 }

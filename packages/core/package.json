@@ -1,7 +1,7 @@
 {
   "name": "@pageskim/core",
-  "version": "0.0.0",
-  "description": "Pure, isomorphic conversion library for the PageSkim format: parse HTML → extract → emit .llm.md/.llm.json. Single source of truth used by the CLI, browser SDK, and playground.",
+  "version": "0.1.0",
+  "description": "Pure, isomorphic conversion library for the PageSkim format: parse HTML \u2192 extract \u2192 emit .llm.md/.llm.json. Single source of truth used by the CLI, browser SDK, and playground.",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -29,5 +29,23 @@
     "domhandler": "^5.0.3",
     "gpt-tokenizer": "^3.0.0",
     "htmlparser2": "^10.0.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pageskim/pageskim.git"
+  },
+  "homepage": "https://github.com/pageskim/pageskim#readme",
+  "bugs": {
+    "url": "https://github.com/pageskim/pageskim/issues"
+  },
+  "keywords": [
+    "llm",
+    "agents",
+    "tokens",
+    "markdown",
+    "llms-txt",
+    "seo",
+    "ai",
+    "pageskim"
+  ]
 }
