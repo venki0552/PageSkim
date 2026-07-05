@@ -22,7 +22,56 @@
     .cookie-banner { position: fixed; bottom: 0; width: 100%; background: #222; color: #fff; padding: 12px 24px; }
     .newsletter { border: 2px dashed #888; padding: 16px; margin: 32px 0; }
     footer.site { border-top: 3px solid #222; padding: 24px; font-size: 85%; }
+    h1 { line-height: 1.2; letter-spacing: -0.01em; }
+    h2 { margin-top: 40px; scroll-margin-top: 24px; }
+    blockquote { border-left: 3px solid #888; margin-left: 0; padding-left: 16px; color: #444; font-style: italic; }
+    article a { color: #0b57d0; text-underline-offset: 2px; }
+    .tags a { display: inline-block; background: #eee; border-radius: 12px; padding: 2px 10px; margin-right: 6px; color: #444; font-size: 85%; }
+    .share-row { display: flex; gap: 12px; margin: 24px 0; padding: 12px 0; border-top: 1px dotted #bbb; border-bottom: 1px dotted #bbb; }
+    .share-row a { font-size: 85%; color: #666; }
+    .prev-next { display: flex; justify-content: space-between; margin-top: 40px; font-size: 90%; }
+    .toc-side { position: sticky; top: 24px; float: right; width: 200px; margin-right: -240px; font-size: 82%; color: #666; }
+    @media (max-width: 1200px) { .toc-side { display: none; } }
+    @media (prefers-color-scheme: dark) {
+      body { background: #191919; color: #ddd; }
+      header.site, footer.site { border-color: #ddd; }
+      .newsletter { border-color: #555; }
+      .tags a { background: #333; color: #ccc; }
+    }
+    @media print { .cookie-banner, .newsletter, .share-row, header.site nav { display: none; } }
   </style>
+  <script>
+    // Reading progress + lazy comment loading; no analytics, no trackers.
+    (function () {
+      "use strict";
+      function onReady(fn) { if (document.readyState !== "loading") { fn(); } else { document.addEventListener("DOMContentLoaded", fn); } }
+      onReady(function () {
+        var bar = document.createElement("div");
+        bar.style.cssText = "position:fixed;top:0;left:0;height:3px;background:#0b57d0;width:0;z-index:99;transition:width .1s";
+        document.body.appendChild(bar);
+        window.addEventListener("scroll", function () {
+          var h = document.documentElement;
+          var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+          bar.style.width = pct + "%";
+        }, { passive: true });
+        var comments = document.getElementById("comments");
+        if (comments && "IntersectionObserver" in window) {
+          new IntersectionObserver(function (entries, obs) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                fetch("/api/comments?post=homelab-power").then(function (r) { return r.json(); })
+                  .then(function (list) { console.debug("comments loaded", list.length); })
+                  .catch(function () { /* offline */ });
+                obs.disconnect();
+              }
+            });
+          }).observe(comments);
+        }
+        var banner = document.querySelector(".cookie-banner button");
+        if (banner) { banner.addEventListener("click", function () { document.querySelector(".cookie-banner").remove(); }); }
+      });
+    })();
+  </script>
 </head>
 <body>
   <header class="site">
@@ -58,6 +107,20 @@
     <h2 id="results">Results and what I'd skip</h2>
     <p>Final numbers after four weeks of post-change logging: 126 W average draw, down from 210 W — exactly 40%, or €229/year at our tariff. Total spend net of selling the Xeon: −€22. The thing I'd skip next time: undervolting the Ryzen. Two evenings of stability testing bought 4 W and one mysterious crash a fortnight later that cost me a Saturday morning. The boring changes — turn things off, batch the work — did 90% of the saving.</p>
 
+    <h2 id="methodology">Methodology notes, for the sceptics</h2>
+    <p>The meter is a DIN-rail Eastron SDM230 logging to the Pi over Modbus once a minute; I verified it against a plug-in Zhurui PR10 on three devices and the readings agreed within 1.5%. "Idle" means the box is up, services running, no interactive session — not suspend. Weekly averages exclude the two days I was physically rearranging the rack, because unplugged servers make flattering graphs. The raw CSV (43,000 rows) and the notebook that produced every number in this post are linked at the bottom; if you find an arithmetic error I will buy you a coffee and publish a correction.</p>
+
+    <blockquote>
+      <p>The cheapest watt is the one you stop drawing; the second-cheapest is the one you schedule.</p>
+    </blockquote>
+
+    <div class="share-row" aria-label="Share">
+      <a href="https://social.example/share?url=https://notes.maren.example.net/2026/homelab-power">Share on Fedi</a>
+      <a href="mailto:?subject=Home%20lab%20power&body=https://notes.maren.example.net/2026/homelab-power">Email</a>
+      <a href="/2026/homelab-power.md">View as markdown</a>
+      <a href="#comments-heading">Jump to comments</a>
+    </div>
+
     <div class="newsletter">
       <p><strong>Enjoyed this?</strong> I write about one measured experiment a month. No spam, unsubscribe anytime.</p>
       <form action="/subscribe" method="post"><input type="email" placeholder="you@example.com" aria-label="Email address"><button>Subscribe</button></form>
@@ -70,7 +133,19 @@
   </article>
 
   <footer class="site">
-    <p>© 2020–2026 Maren Okafor · <a href="/imprint">Imprint</a> · <a href="/privacy">Privacy</a> · Content licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+    <nav aria-label="Footer">
+      <ul>
+        <li><a href="/archive">All posts</a></li>
+        <li><a href="/series/measured">The "measured, not vibes" series</a></li>
+        <li><a href="/2026/nas-rebuild">Previous: Rebuilding the NAS without downtime</a></li>
+        <li><a href="/2026/solar-sizing">Next: Sizing solar for a rack that mostly sleeps</a></li>
+        <li><a href="/uses">Uses</a></li>
+        <li><a href="/now">Now</a></li>
+        <li><a href="/rss.xml">RSS</a></li>
+        <li><a href="/newsletter">Newsletter</a></li>
+      </ul>
+    </nav>
+    <p>© 2020–2026 Maren Okafor · <a href="/imprint">Imprint</a> · <a href="/privacy">Privacy</a> · Content licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> · Built with a static site generator and stubbornness · <a href="/colophon">Colophon</a></p>
   </footer>
 
   <div class="cookie-banner" role="dialog" aria-label="Cookie notice">

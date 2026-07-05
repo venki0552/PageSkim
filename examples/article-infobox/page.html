@@ -5,42 +5,141 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lighthouse of Alexandria - Encyclopedia Exemplaris</title>
   <meta name="description" content="The Lighthouse of Alexandria, one of the Seven Wonders of the Ancient World, guided sailors into the harbour of Alexandria for over 1,500 years.">
+  <meta name="keywords" content="Lighthouse of Alexandria, Pharos, Seven Wonders, Ptolemaic Egypt, ancient architecture">
   <meta property="og:title" content="Lighthouse of Alexandria">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://encyclopedia.example.org/wiki/lighthouse-of-alexandria">
   <meta property="og:description" content="One of the Seven Wonders of the Ancient World, built on the island of Pharos in the third century BC.">
+  <meta property="og:image" content="https://encyclopedia.example.org/img/pharos-reconstruction.jpg">
+  <meta property="og:site_name" content="Encyclopedia Exemplaris">
+  <meta property="article:modified_time" content="2026-03-12T09:41:00Z">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://encyclopedia.example.org/wiki/lighthouse-of-alexandria">
+  <link rel="alternate" hreflang="de" href="https://encyclopedia.example.org/de/wiki/leuchtturm-von-alexandria">
+  <link rel="alternate" hreflang="fr" href="https://encyclopedia.example.org/fr/wiki/phare-d-alexandrie">
   <style>
-    body { font-family: Georgia, serif; margin: 0; color: #202122; }
-    .site-header { background: #f8f9fa; border-bottom: 1px solid #a2a9b1; padding: 8px 16px; }
-    .site-nav ul { list-style: none; display: flex; gap: 16px; margin: 0; padding: 0; }
-    .infobox { float: right; width: 280px; border: 1px solid #a2a9b1; background: #f8f9fa; font-size: 88%; margin: 0 0 16px 16px; border-collapse: collapse; }
-    .infobox th { text-align: left; padding: 4px 8px; vertical-align: top; }
+    :root { --text: #202122; --link: #3366cc; --border: #a2a9b1; --bg-soft: #f8f9fa; --bg-highlight: #eaf3ff; }
+    * { box-sizing: border-box; }
+    html { font-size: 100%; -webkit-text-size-adjust: 100%; }
+    body { font-family: Georgia, "Times New Roman", serif; margin: 0; color: var(--text); line-height: 1.6; background: #fff; }
+    a { color: var(--link); text-decoration: none; } a:hover { text-decoration: underline; }
+    a:visited { color: #795cb2; } a:active { color: #faa700; }
+    .site-header { background: var(--bg-soft); border-bottom: 1px solid var(--border); padding: 8px 16px; position: sticky; top: 0; z-index: 100; }
+    .site-nav ul { list-style: none; display: flex; gap: 16px; margin: 0; padding: 0; flex-wrap: wrap; }
+    .site-nav li { display: inline-block; white-space: nowrap; }
+    .search-box { display: inline-flex; margin-left: auto; border: 1px solid var(--border); border-radius: 2px; }
+    .search-box input { border: 0; padding: 4px 8px; font-size: 13px; width: 220px; }
+    .search-box button { border: 0; background: var(--bg-soft); padding: 4px 10px; cursor: pointer; }
+    .infobox { float: right; width: 280px; border: 1px solid var(--border); background: var(--bg-soft); font-size: 88%; margin: 0 0 16px 16px; border-collapse: collapse; }
+    .infobox caption { font-weight: bold; padding: 6px; background: #cedff2; }
+    .infobox th { text-align: left; padding: 4px 8px; vertical-align: top; width: 40%; }
     .infobox td { padding: 4px 8px; }
     .content { max-width: 960px; margin: 0 auto; padding: 16px; }
-    .site-footer { background: #f8f9fa; border-top: 1px solid #a2a9b1; padding: 16px; font-size: 80%; }
-    figure { margin: 16px 0; }
-    figcaption { font-size: 85%; color: #54595d; }
+    .content h2 { border-bottom: 1px solid var(--border); font-weight: normal; margin-top: 28px; }
+    .content h3 { font-weight: bold; font-size: 105%; }
+    .hatnote { font-style: italic; font-size: 90%; padding-left: 1.6em; color: #54595d; }
+    .toc-box { display: inline-block; border: 1px solid var(--border); background: var(--bg-soft); padding: 8px 16px; font-size: 90%; margin: 8px 0; }
+    .toc-box ol { margin: 4px 0; padding-left: 24px; }
+    .reflist { font-size: 85%; column-count: 2; column-gap: 24px; }
+    .site-footer { background: var(--bg-soft); border-top: 1px solid var(--border); padding: 16px; font-size: 80%; margin-top: 32px; }
+    .site-footer ul { list-style: none; display: flex; flex-wrap: wrap; gap: 12px; padding: 0; }
+    .lang-list { list-style: none; padding: 0; font-size: 88%; }
+    .lang-list li { padding: 2px 0; }
+    figure { margin: 16px 0; text-align: center; }
+    figure img { max-width: 100%; height: auto; border: 1px solid var(--border); }
+    figcaption { font-size: 85%; color: #54595d; text-align: left; padding: 4px; }
+    .edit-tools { float: right; font-size: 80%; }
+    .notice-banner { background: var(--bg-highlight); border: 1px solid #36c; padding: 8px 16px; margin: 8px 0; font-size: 88%; }
+    aside.related { border: 1px solid var(--border); padding: 12px 16px; margin-top: 24px; background: var(--bg-soft); }
+    @media (max-width: 720px) {
+      .infobox { float: none; width: 100%; margin: 16px 0; }
+      .reflist { column-count: 1; }
+      .search-box input { width: 120px; }
+      .site-nav ul { gap: 8px; font-size: 90%; }
+    }
+    @media print {
+      .site-header, .site-footer, .edit-tools, .notice-banner, aside { display: none; }
+      body { font-size: 11pt; }
+    }
   </style>
+  <script>
+    // Site chrome bootstrap: menu toggles, search suggestions, section folding.
+    (function () {
+      "use strict";
+      var config = { suggestUrl: "/api/suggest?q=", debounceMs: 180, maxSuggestions: 8, foldSectionsBelow: 720 };
+      function debounce(fn, ms) { var t; return function () { var a = arguments, s = this; clearTimeout(t); t = setTimeout(function () { fn.apply(s, a); }, ms); }; }
+      function onReady(fn) { if (document.readyState !== "loading") { fn(); } else { document.addEventListener("DOMContentLoaded", fn); } }
+      onReady(function () {
+        var search = document.querySelector(".search-box input");
+        if (search) {
+          search.addEventListener("input", debounce(function () {
+            if (this.value.length < 3) { return; }
+            fetch(config.suggestUrl + encodeURIComponent(this.value))
+              .then(function (r) { return r.json(); })
+              .then(function (items) { console.debug("suggest", items.slice(0, config.maxSuggestions)); })
+              .catch(function () { /* offline: ignore */ });
+          }, config.debounceMs));
+        }
+        if (window.innerWidth < config.foldSectionsBelow) {
+          document.querySelectorAll(".content h2").forEach(function (h) {
+            h.setAttribute("role", "button");
+            h.addEventListener("click", function () { h.classList.toggle("folded"); });
+          });
+        }
+        var perf = window.performance && performance.timing;
+        if (perf) { console.debug("ttfb", perf.responseStart - perf.navigationStart); }
+      });
+    })();
+  </script>
 </head>
 <body>
+  <a class="skip-link" href="#lighthouse-of-alexandria">Skip to content</a>
   <header class="site-header">
     <nav class="site-nav" aria-label="Site">
       <ul>
         <li><a href="/">Main page</a></li>
         <li><a href="/contents">Contents</a></li>
+        <li><a href="/featured">Featured articles</a></li>
+        <li><a href="/current-events">Current events</a></li>
         <li><a href="/random">Random article</a></li>
+        <li><a href="/portals">Portals</a></li>
         <li><a href="/about">About Encyclopedia Exemplaris</a></li>
+        <li><a href="/community">Community portal</a></li>
+        <li><a href="/recent-changes">Recent changes</a></li>
+        <li><a href="/upload">Upload file</a></li>
+        <li><a href="/special-pages">Special pages</a></li>
+        <li><a href="/help">Help</a></li>
         <li><a href="/donate">Donate</a></li>
+        <li><a href="/preferences">Preferences</a></li>
+        <li><a href="/watchlist">Watchlist</a></li>
+        <li><a href="/contributions">Contributions</a></li>
         <li><a href="/login">Log in</a></li>
+        <li><a href="/signup">Create account</a></li>
       </ul>
+      <form class="search-box" role="search" action="/search">
+        <input type="search" name="q" placeholder="Search Encyclopedia Exemplaris" aria-label="Search">
+        <button type="submit">Search</button>
+      </form>
     </nav>
   </header>
+
+  <div class="notice-banner" role="note">
+    Encyclopedia Exemplaris survives on reader support. If everyone reading this donated the price of a coffee, our fundraiser would be over in an hour. <a href="/donate">Please donate</a>. <button aria-label="Dismiss">✕</button>
+  </div>
 
   <div class="content">
     <main>
       <article>
+        <div class="edit-tools">
+          <a href="/edit/lighthouse-of-alexandria">Edit</a> ·
+          <a href="/history/lighthouse-of-alexandria">View history</a> ·
+          <a href="/talk/lighthouse-of-alexandria">Talk</a> ·
+          <a href="/cite/lighthouse-of-alexandria">Cite this page</a> ·
+          <a href="/pdf/lighthouse-of-alexandria">Download PDF</a>
+        </div>
+
         <h1 id="lighthouse-of-alexandria">Lighthouse of Alexandria</h1>
+        <p class="hatnote">"Pharos" redirects here. For the island, see <a href="/wiki/pharos-island">Pharos (island)</a>. For other uses, see <a href="/wiki/pharos-disambiguation">Pharos (disambiguation)</a>.</p>
 
         <table class="infobox">
           <caption>Lighthouse of Alexandria</caption>
@@ -53,8 +152,10 @@
             <tr><th scope="row">Height</th><td>c. 100 m (330 ft)</td></tr>
             <tr><th scope="row">Builder</th><td>Sostratus of Cnidus (attributed)</td></tr>
             <tr><th scope="row">Commissioned by</th><td>Ptolemy I Soter</td></tr>
+            <tr><th scope="row">Cost</th><td>800 talents of silver</td></tr>
             <tr><th scope="row">Type</th><td>Lighthouse</td></tr>
             <tr><th scope="row">Material</th><td>Light-coloured stone, molten lead mortar</td></tr>
+            <tr><th scope="row">Successor site</th><td>Citadel of Qaitbay (1480)</td></tr>
           </tbody>
         </table>
 
@@ -62,61 +163,115 @@
 
         <p>Badly damaged by three earthquakes between 956 and 1323 AD, it became an abandoned ruin. It was the third-longest surviving ancient wonder, after the Mausoleum at Halicarnassus and the still-extant Great Pyramid of Giza. In 1480 the last of its remnant stones were used to build the Citadel of Qaitbay on the same site.</p>
 
+        <div class="toc-box" role="navigation" aria-label="Contents">
+          <strong>Contents</strong>
+          <ol>
+            <li><a href="#origin">Origin</a></li>
+            <li><a href="#construction">Construction</a></li>
+            <li><a href="#height-and-description">Height and description</a></li>
+            <li><a href="#destruction">Destruction</a></li>
+            <li><a href="#archaeological-research">Archaeological research</a></li>
+            <li><a href="#in-ancient-and-medieval-accounts">In ancient and medieval accounts</a></li>
+            <li><a href="#legacy">Legacy</a></li>
+            <li><a href="#references">References</a></li>
+          </ol>
+        </div>
+
         <h2 id="origin">Origin</h2>
         <p>Pharos was a small island just off the coast of Alexandria, connected to the city by a man-made causeway called the Heptastadion, which thereby formed one side of the harbour. Because the Egyptian coast is flat and lacked the kind of landmark used at the time for navigation, a marker of some sort at the mouth of the harbour was considered necessary — a function the lighthouse was initially designed to serve. Use of the building as a lighthouse, with a fire and reflective mirrors at the top, is thought to date to around the first century AD.</p>
 
-        <p>The construction is commonly attributed to Sostratus of Cnidus, though ancient sources disagree on whether he was the architect or the financial sponsor of the project. The monument cost 800 talents of silver according to Pliny the Elder — an enormous sum, roughly a tenth of the treasury Ptolemy I held at his accession.</p>
+        <p>The construction is commonly attributed to Sostratus of Cnidus, though ancient sources disagree on whether he was the architect or the financial sponsor of the project. The monument cost 800 talents of silver according to Pliny the Elder — an enormous sum, roughly a tenth of the treasury Ptolemy I held at his accession. Legend holds that Sostratus was forbidden by Ptolemy from putting his name on the work, and that he carved a dedication into the masonry anyway, covering it with plaster bearing the king's name; the plaster was meant to weather away and reveal the builder's inscription to posterity.</p>
+
+        <h2 id="construction">Construction</h2>
+        <p>The lighthouse was built from large blocks of light-coloured stone — a combination of limestone in the body and granite at points of structural stress, according to the archaeological consensus. The blocks were sealed together with molten lead rather than ordinary mortar, a measure ancient writers explain as protection against the pounding of the waves. Construction on the exposed reef required the platform to be raised above storm level, and the foundation courses were laid directly onto the levelled bedrock of the islet.</p>
+
+        <p>Work is thought to have begun under Ptolemy I Soter around 297 BC and to have been completed under his son Ptolemy II Philadelphus around 283 BC, a construction period of roughly twelve to fifteen years. The project drew on the same royal treasury and engineering establishment that produced the Museum and the Library of Alexandria in the same generation, and the three works together made the new capital the most conspicuous city of the Hellenistic world.</p>
 
         <h2 id="height-and-description">Height and description</h2>
         <p>Descriptions by ancient and medieval travellers agree that the lighthouse rose in three tapering stages: a square lower section with a central core, an octagonal middle section, and a circular upper section topped by a large statue, probably of Zeus Soter or Helios. Arab travellers who visited between the tenth and fourteenth centuries recorded measurements that, converted carefully, suggest a total height of just over 100 metres including the foundation platform.</p>
 
         <figure>
-          <img src="pharos-reconstruction.jpg" alt="A three-stage stone tower rising from a fortified platform beside a harbour, drawn as an architectural reconstruction" width="640" height="420">
+          <img src="pharos-reconstruction.jpg" alt="A three-stage stone tower rising from a fortified platform beside a harbour, drawn as an architectural reconstruction" width="640" height="420" loading="lazy">
           <figcaption>A 2013 architectural reconstruction of the lighthouse based on the 1909 study by Hermann Thiersch.</figcaption>
         </figure>
 
-        <p>The interior of the lowest stage reportedly contained a wide spiral ramp, allowing fuel for the beacon fire to be hauled up by pack animals. At the summit, a mirror — possibly of polished bronze — reflected sunlight during the day; a fire provided light by night. Some accounts claim the light could be seen up to 47 kilometres away.</p>
+        <p>The interior of the lowest stage reportedly contained a wide spiral ramp, allowing fuel for the beacon fire to be hauled up by pack animals. At the summit, a mirror — possibly of polished bronze — reflected sunlight during the day; a fire provided light by night. Some accounts claim the light could be seen up to 47 kilometres away. The ground stage also housed a garrison and stabling, and travellers describe hundreds of storage rooms opening off the ascending ramp.</p>
 
         <h3 id="later-accounts">Later accounts</h3>
         <p>The traveller Ibn Battuta visited Alexandria in 1326 and again in 1349. On his first visit he found the lighthouse partly ruined but still possible to enter; on the second, he reported that the ruin was such that entry was no longer possible. His account is among the last eyewitness descriptions of the structure standing to any height.</p>
 
         <h2 id="destruction">Destruction</h2>
-        <p>The lighthouse was progressively destroyed by earthquakes in 956, 1303 and 1323 AD. The 1303 Crete earthquake, felt across the eastern Mediterranean, is generally regarded as the event that ended its use. By the mid-fourteenth century the structure was a ruin, and in around 1480 the Mamluk sultan Qaitbay built a fortress on the platform using the fallen stone. The Citadel of Qaitbay still occupies the site today.</p>
+        <p>The lighthouse was progressively destroyed by earthquakes in 956, 1303 and 1323 AD. The 956 earthquake cracked the upper stage and brought down the crowning statue; repairs under the Fatimid caliphs restored the tower as a functioning beacon, reportedly adding a small mosque at the summit. The 1303 Crete earthquake, felt across the eastern Mediterranean, is generally regarded as the event that ended its use. By the mid-fourteenth century the structure was a ruin, and in around 1480 the Mamluk sultan Qaitbay built a fortress on the platform using the fallen stone. The Citadel of Qaitbay still occupies the site today.</p>
 
         <h2 id="archaeological-research">Archaeological research</h2>
-        <p>In 1994, a team of archaeologists led by Jean-Yves Empereur documented hundreds of large masonry blocks and statuary fragments on the seabed off Fort Qaitbay, many of which are believed to have fallen from the lighthouse. Subsequent surveys mapped columns, sphinxes and colossal statue fragments, some of which have been raised and displayed. The underwater site was added to UNESCO's tentative list of submerged cultural heritage in Alexandria.</p>
+        <p>In 1994, a team of archaeologists led by Jean-Yves Empereur documented hundreds of large masonry blocks and statuary fragments on the seabed off Fort Qaitbay, many of which are believed to have fallen from the lighthouse. Subsequent surveys mapped columns, sphinxes and colossal statue fragments, some of which have been raised and displayed. More than 3,300 pieces had been catalogued by the project by the end of the decade, including twenty-five sphinxes and fragments of a colossal royal couple in Egyptian style.</p>
+
+        <p>The underwater site was added to UNESCO's tentative list of submerged cultural heritage in Alexandria, and proposals have circulated since the late 1990s for an underwater archaeological museum that would make the field of blocks accessible to visitors. Survey work continues, and photogrammetric models of the debris field published in the 2010s have refined estimates of how the tower collapsed.</p>
+
+        <h2 id="in-ancient-and-medieval-accounts">In ancient and medieval accounts</h2>
+        <p>The lighthouse appears in a remarkably continuous chain of testimony: Strabo and Pliny the Elder describe it in the first centuries BC and AD, Arab geographers including al-Masudi, al-Idrisi and Yaqut record measurements and repairs between the tenth and thirteenth centuries, and Ibn Battuta's fourteenth-century visits bracket its final ruin. Coins minted in Alexandria in the second century AD show the tower with its statue, and mosaics from as far away as Libya and Jordan depict it as the emblem of the city itself.</p>
 
         <h2 id="legacy">Legacy</h2>
         <p>The lighthouse gave its name to the architectural type: <em>pharos</em> became the word for lighthouse in Greek, and survives in the French <em>phare</em>, Italian and Spanish <em>faro</em>, Romanian <em>far</em> and Portuguese <em>farol</em>. Minarets of early Egyptian mosques are thought by some scholars to echo its three-stage form, and modern reconstructions of the building have been proposed several times, including a 2015 Egyptian plan to rebuild it near the original site.</p>
 
         <h2 id="references">References</h2>
-        <ol>
+        <ol class="reflist">
           <li>Pliny the Elder, <cite>Natural History</cite>, Book XXXVI.</li>
+          <li>Strabo, <cite>Geography</cite>, Book XVII.</li>
           <li>Thiersch, Hermann (1909). <cite>Pharos: Antike, Islam und Occident</cite>. Leipzig.</li>
           <li>Empereur, Jean-Yves (1998). <cite>Alexandria Rediscovered</cite>. British Museum Press.</li>
           <li>McKenzie, Judith (2007). <cite>The Architecture of Alexandria and Egypt 300 BC–AD 700</cite>. Yale University Press.</li>
+          <li>Clayton, Peter; Price, Martin, eds. (1988). <cite>The Seven Wonders of the Ancient World</cite>. Routledge.</li>
+          <li>Ibn Battuta, <cite>Rihla</cite>, trans. H.A.R. Gibb.</li>
+          <li>Behrens-Abouseif, Doris (2006). "The Islamic History of the Lighthouse of Alexandria". <cite>Muqarnas</cite> 23.</li>
         </ol>
       </article>
     </main>
 
-    <aside aria-label="Related articles">
+    <aside class="related" aria-label="Related articles">
       <h2>Related articles</h2>
       <ul>
         <li><a href="/wiki/seven-wonders">Seven Wonders of the Ancient World</a></li>
         <li><a href="/wiki/citadel-of-qaitbay">Citadel of Qaitbay</a></li>
         <li><a href="/wiki/ptolemy-i-soter">Ptolemy I Soter</a></li>
+        <li><a href="/wiki/sostratus-of-cnidus">Sostratus of Cnidus</a></li>
+        <li><a href="/wiki/heptastadion">Heptastadion</a></li>
+        <li><a href="/wiki/library-of-alexandria">Library of Alexandria</a></li>
         <li><a href="/wiki/ancient-alexandria">Ancient Alexandria</a></li>
+        <li><a href="/wiki/list-of-tallest-structures">List of tallest ancient structures</a></li>
+      </ul>
+    </aside>
+
+    <aside aria-label="Languages">
+      <h2>In other languages</h2>
+      <ul class="lang-list">
+        <li><a href="/de/wiki/leuchtturm-von-alexandria">Deutsch</a></li>
+        <li><a href="/fr/wiki/phare-d-alexandrie">Français</a></li>
+        <li><a href="/es/wiki/faro-de-alejandria">Español</a></li>
+        <li><a href="/it/wiki/faro-di-alessandria">Italiano</a></li>
+        <li><a href="/pt/wiki/farol-de-alexandria">Português</a></li>
+        <li><a href="/ar/wiki/منارة-الإسكندرية">العربية</a></li>
+        <li><a href="/el/wiki/φάρος-της-αλεξάνδρειας">Ελληνικά</a></li>
+        <li><a href="/ja/wiki/アレクサンドリアの大灯台">日本語</a></li>
+        <li><a href="/zh/wiki/亚历山大灯塔">中文</a></li>
+        <li><a href="/ru/wiki/александрийский-маяк">Русский</a></li>
       </ul>
     </aside>
   </div>
 
   <footer class="site-footer">
-    <p>Text is available under the Creative Commons Attribution-ShareAlike License 4.0; additional terms may apply.</p>
+    <p>Text is available under the Creative Commons Attribution-ShareAlike License 4.0; additional terms may apply. By using this site, you agree to the Terms of Use and Privacy Policy. Encyclopedia Exemplaris® is a registered trademark of the Exemplaris Foundation, a non-profit organisation.</p>
     <ul>
       <li><a href="/privacy">Privacy policy</a></li>
-      <li><a href="/terms">Terms of use</a></li>
-      <li><a href="/cookies">Cookie statement</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/disclaimers">Disclaimers</a></li>
       <li><a href="/contact">Contact</a></li>
+      <li><a href="/code-of-conduct">Code of conduct</a></li>
+      <li><a href="/developers">Developers</a></li>
+      <li><a href="/statistics">Statistics</a></li>
+      <li><a href="/cookies">Cookie statement</a></li>
+      <li><a href="/mobile">Mobile view</a></li>
+      <li><a href="/terms">Terms of use</a></li>
     </ul>
     <p>Page last edited on 12 March 2026, at 09:41 (UTC).</p>
   </footer>

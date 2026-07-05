@@ -18,7 +18,60 @@
     table.opts { border-collapse: collapse; width: 100%; font-size: 14px; }
     table.opts th, table.opts td { border: 1px solid #d0d7de; padding: 6px 10px; text-align: left; }
     .admonition { border-left: 4px solid #0969da; background: #ddf4ff; padding: 8px 16px; margin: 16px 0; }
+    .admonition.warn { border-color: #9a6700; background: #fff8c5; }
+    h1, h2, h3 { scroll-margin-top: 64px; }
+    h2 { border-bottom: 1px solid #d0d7de; padding-bottom: 4px; margin-top: 32px; }
+    .anchor-link { opacity: 0; margin-left: 6px; font-size: 80%; } h2:hover .anchor-link { opacity: 1; }
+    .sidenav a { color: #1b1f24; display: block; padding: 3px 6px; border-radius: 4px; }
+    .sidenav a:hover { background: #f3f4f6; }
+    .sidenav a[aria-current="page"] { background: #ddf4ff; font-weight: 600; }
+    .topbar nav a { color: #1b1f24; margin-right: 4px; padding: 6px 10px; border-radius: 6px; }
+    .topbar nav a:hover { background: #f3f4f6; }
+    .version-picker { border: 1px solid #d0d7de; border-radius: 6px; padding: 4px 8px; font-size: 13px; }
+    .breadcrumbs { font-size: 13px; color: #57606a; padding: 8px 0; }
+    .toc-inline { float: right; border: 1px solid #d0d7de; border-radius: 6px; padding: 8px 16px; margin: 0 0 16px 24px; font-size: 13px; max-width: 260px; }
+    .feedback-widget { border-top: 1px solid #d0d7de; margin-top: 40px; padding-top: 16px; font-size: 14px; color: #57606a; }
+    .feedback-widget button { border: 1px solid #d0d7de; background: #f6f8fa; border-radius: 6px; padding: 4px 12px; margin-right: 8px; cursor: pointer; }
+    kbd { background: #f6f8fa; border: 1px solid #d0d7de; border-bottom-width: 3px; border-radius: 4px; padding: 1px 5px; font-size: 12px; }
+    @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .sidenav { display: none; } .toc-inline { float: none; max-width: none; } }
+    @media (prefers-color-scheme: dark) {
+      body { background: #0d1117; color: #e6edf3; }
+      pre, .feedback-widget button { background: #161b22; }
+      .topbar, .sidenav { border-color: #30363d; }
+      table.opts th, table.opts td { border-color: #30363d; }
+    }
   </style>
+  <script>
+    // Docs chrome: copy buttons on code blocks, keyboard search shortcut, version pinning.
+    (function () {
+      "use strict";
+      function onReady(fn) { if (document.readyState !== "loading") { fn(); } else { document.addEventListener("DOMContentLoaded", fn); } }
+      onReady(function () {
+        document.querySelectorAll("pre").forEach(function (pre) {
+          var btn = document.createElement("button");
+          btn.textContent = "Copy";
+          btn.className = "copy-btn";
+          btn.addEventListener("click", function () {
+            navigator.clipboard.writeText(pre.textContent || "").then(function () {
+              btn.textContent = "Copied!";
+              setTimeout(function () { btn.textContent = "Copy"; }, 1500);
+            });
+          });
+          pre.appendChild(btn);
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "/" && document.activeElement && document.activeElement.tagName !== "INPUT") {
+            e.preventDefault();
+            var s = document.querySelector('input[type="search"]');
+            if (s) { s.focus(); }
+          }
+        });
+        var stored = null;
+        try { stored = localStorage.getItem("gridctl-docs-version"); } catch (err) { /* private mode */ }
+        if (stored && stored !== "v2") { console.info("Viewing v2 docs; your pinned version is " + stored); }
+      });
+    })();
+  </script>
 </head>
 <body>
   <header class="topbar">
@@ -118,8 +171,32 @@ gridctl submit train.job --queue=standard   # flag wins
 gridctl.toml:14: unknown key "max_retrys" in [defaults] (did you mean "max_retries"?)
 </code></pre>
 
+        <h2 id="logging-options">[logging] options</h2>
+        <p>Client-side logging is written to stderr by default and never contains job payloads. Structured output is available for shipping into a log pipeline.</p>
+        <table class="opts">
+          <thead>
+            <tr><th>Option</th><th>Type</th><th>Default</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>level</code></td><td>string</td><td><code>"info"</code></td><td>One of <code>error</code>, <code>warn</code>, <code>info</code>, <code>debug</code>, <code>trace</code>.</td></tr>
+            <tr><td><code>format</code></td><td>string</td><td><code>"text"</code></td><td><code>text</code> for humans, <code>json</code> for pipelines.</td></tr>
+            <tr><td><code>file</code></td><td>path</td><td>stderr</td><td>Append logs to a file instead of stderr.</td></tr>
+            <tr><td><code>redact_env</code></td><td>bool</td><td><code>true</code></td><td>Replace values of env vars matching <code>*_TOKEN</code>, <code>*_SECRET</code>, <code>*_KEY</code> with <code>[redacted]</code> in debug output.</td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="secrets">Secrets and credential handling</h2>
+        <p>gridctl never stores credentials in its configuration file. The API token is read from <code>$GRIDCTL_TOKEN</code>, from the system keychain when <code>gridctl login</code> has been run, or from a credentials helper named in <code>[cluster].credential_helper</code>. If more than one source is available the order is: explicit environment variable, credential helper, keychain. A missing token produces exit code 3 with a pointer to <code>gridctl login</code>; it is never prompted for interactively in non-TTY contexts, which keeps CI failures loud and fast.</p>
+
+        <h2 id="troubleshooting">Troubleshooting</h2>
+        <p>The three most common configuration problems, in the order support sees them: a stale <code>endpoint</code> after a cluster migration (symptom: <code>connect timeout</code> after exactly <code>connect_timeout_ms</code>; fix: update <code>[cluster].endpoint</code>); TLS verification failures against clusters using a private CA (symptom: <code>x509: certificate signed by unknown authority</code>; fix: set <code>ca_bundle</code>, do not disable <code>tls</code>); and environment overrides leaking from a forgotten shell profile (symptom: flags appear ignored; fix: run <code>gridctl config show --effective --origins</code>, which annotates every value with the source that set it).</p>
+
         <h2 id="migrating-from-v1">Migrating from v1</h2>
         <p>Version 2 renamed the <code>[server]</code> section to <code>[cluster]</code> and moved retry settings from <code>[retry]</code> into <code>[defaults]</code>. Run <code>gridctl config migrate</code> to rewrite a v1 file in place; a backup is written alongside with a <code>.v1.bak</code> suffix. The v1 format is read-only supported until gridctl 2.4 and removed in 2.5.</p>
+
+        <div class="feedback-widget" aria-label="Feedback">
+          <p>Was this page helpful? <button>Yes</button> <button>No</button> · <a href="https://github.example.com/gridctl/docs/edit/main/reference/configuration.md">Edit this page</a> · <a href="https://github.example.com/gridctl/gridctl/issues/new?labels=docs">Report an issue</a></p>
+        </div>
       </article>
 
       <nav aria-label="Page footer">
@@ -129,7 +206,23 @@ gridctl.toml:14: unknown key "max_retrys" in [defaults] (did you mean "max_retri
   </div>
 
   <footer>
-    <p>© 2026 gridctl contributors · <a href="/license">Apache-2.0</a> · <a href="/privacy">Privacy</a> · Built with DocForge 3.2</p>
+    <nav aria-label="Footer">
+      <ul>
+        <li><a href="/getting-started">Getting started</a></li>
+        <li><a href="/guides/first-job">Your first job</a></li>
+        <li><a href="/guides/arrays">Array jobs</a></li>
+        <li><a href="/guides/gpus">GPU scheduling</a></li>
+        <li><a href="/reference/cli">CLI reference</a></li>
+        <li><a href="/reference/exit-codes">Exit codes</a></li>
+        <li><a href="/changelog">Changelog</a></li>
+        <li><a href="/roadmap">Roadmap</a></li>
+        <li><a href="/community/slack">Community Slack</a></li>
+        <li><a href="/community/office-hours">Office hours</a></li>
+        <li><a href="/security">Security policy</a></li>
+        <li><a href="/brand">Brand assets</a></li>
+      </ul>
+    </nav>
+    <p>© 2026 gridctl contributors · <a href="/license">Apache-2.0</a> · <a href="/privacy">Privacy</a> · <a href="/imprint">Imprint</a> · Built with DocForge 3.2 · <a href="/rss.xml">Release feed</a></p>
   </footer>
 </body>
 </html>

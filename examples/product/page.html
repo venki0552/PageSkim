@@ -41,7 +41,60 @@
     table.specs { border-collapse: collapse; width: 100%; font-size: 14px; }
     table.specs th, table.specs td { border-bottom: 1px solid #e3e5e8; padding: 8px 4px; text-align: left; }
     footer.shop { background: #f5f6f8; padding: 32px; margin-top: 48px; font-size: 13px; }
+    header.shop nav a { color: #17181c; padding: 6px 8px; border-radius: 6px; }
+    header.shop nav a:hover { background: #f0f1f3; }
+    .buy label { display: block; margin: 10px 0; font-size: 14px; }
+    .buy select { border: 1px solid #c9ccd1; border-radius: 8px; padding: 8px 12px; min-width: 260px; font-size: 14px; }
+    .buy button:hover { background: #084bd6; }
+    .buy button:focus-visible { outline: 3px solid #9ec1ff; outline-offset: 2px; }
+    .trust-row { display: flex; gap: 20px; margin: 16px 0; font-size: 13px; color: #6a6f78; }
+    .stock-pill { display: inline-block; background: #e7f7ec; color: #116329; border-radius: 12px; padding: 2px 10px; font-size: 13px; font-weight: 600; }
+    table.specs th { color: #6a6f78; font-weight: 500; width: 38%; }
+    .reviews-summary { display: flex; gap: 24px; align-items: center; border: 1px solid #e3e5e8; border-radius: 12px; padding: 16px 24px; margin: 16px 0; }
+    .rating-big { font-size: 40px; font-weight: 700; }
+    .faq details { border-bottom: 1px solid #e3e5e8; padding: 12px 0; }
+    .faq summary { cursor: pointer; font-weight: 600; }
+    footer.shop ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 20px; padding: 0; }
+    @media (max-width: 860px) { .product { grid-template-columns: 1fr; } .buy select { min-width: 100%; } }
+    @media (prefers-color-scheme: dark) {
+      body { background: #101114; color: #e8e9eb; }
+      header.shop, table.specs th, table.specs td { border-color: #2a2c31; }
+      footer.shop { background: #17181c; }
+      .buy select { background: #17181c; color: #e8e9eb; border-color: #3a3d44; }
+    }
   </style>
+  <script>
+    // Storefront chrome: variant price sync, cart badge, delivery estimate.
+    (function () {
+      "use strict";
+      var variantPrices = { "ISO-DE": 149.0, "ISO-UK": 149.0, "ANSI-US": 144.0 };
+      function onReady(fn) { if (document.readyState !== "loading") { fn(); } else { document.addEventListener("DOMContentLoaded", fn); } }
+      onReady(function () {
+        var selects = document.querySelectorAll(".buy select");
+        var price = document.querySelector(".price");
+        selects.forEach(function (sel) {
+          sel.addEventListener("change", function () {
+            var layout = this.value;
+            if (variantPrices[layout] && price) {
+              price.firstChild.textContent = "€" + variantPrices[layout].toFixed(2) + " ";
+            }
+          });
+        });
+        var addBtn = document.querySelector(".buy button");
+        if (addBtn) {
+          addBtn.addEventListener("click", function () {
+            var cart = document.querySelector('a[href="/cart"]');
+            if (cart) { cart.textContent = "Cart (1)"; }
+            addBtn.textContent = "Added ✓";
+            setTimeout(function () { addBtn.textContent = "Add to cart"; }, 2000);
+          });
+        }
+        var cutoff = new Date(); cutoff.setHours(14, 0, 0, 0);
+        var sameDay = new Date() < cutoff;
+        console.debug("same-day dispatch:", sameDay);
+      });
+    })();
+  </script>
 </head>
 <body>
   <div class="promo-bar">Free EU shipping over €80 · 30-day returns · Summer sale ends 31 July</div>
@@ -103,6 +156,32 @@
 
         <h2 id="shipping-and-returns">Shipping and returns</h2>
         <p>Orders placed before 14:00 CET ship the same day from our Rotterdam warehouse. EU shipping is free over €80 (otherwise €5.90); UK and Switzerland €12.90 with duties prepaid. Returns are accepted within 30 days in any condition — yes, including after you've swapped the switches — with a prepaid label for EU customers.</p>
+
+        <h2 id="reviews">Reviews</h2>
+        <div class="reviews-summary">
+          <div><span class="rating-big">4.6</span>/5</div>
+          <div>
+            <p>Based on 312 verified purchases. 87% would recommend to a friend.</p>
+            <p>Most praised: typing feel, battery life. Most criticised: weight (it is not a travel board).</p>
+          </div>
+        </div>
+        <p>"The gasket mount makes it noticeably softer than my old tray-mount board — I typed this review at 2am without waking anyone." — <strong>Jonas K.</strong>, verified purchase, March 2026. "Swapped the Tides for lubed Reefs in ten minutes, no soldering, and the stabilisers came tuned from the factory." — <strong>Priya S.</strong>, verified purchase, February 2026. "Two kilograms. My desk approves, my backpack has filed a complaint." — <strong>Álvaro M.</strong>, verified purchase, April 2026.</p>
+
+        <h2 id="faq">Frequently asked questions</h2>
+        <div class="faq">
+          <details>
+            <summary>Does the K2 work with macOS, Windows and Linux?</summary>
+            <p>Yes. A physical toggle switches the modifier layout between Mac and Windows/Linux legends; both sets of keycaps are included. Firmware updates ship for all three platforms.</p>
+          </details>
+          <details>
+            <summary>Can I remap keys?</summary>
+            <p>The K2 runs QMK-compatible firmware with VIA support, so every key and layer is remappable in the browser with no software install.</p>
+          </details>
+          <details>
+            <summary>Is there a low-profile version?</summary>
+            <p>Not yet. A low-profile K2 LP is on the public roadmap for late 2026.</p>
+          </details>
+        </div>
       </article>
     </section>
   </main>
