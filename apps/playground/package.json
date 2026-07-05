@@ -1,0 +1,7 @@
+{
+  "name": "@agentpage/playground",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Hosted AgentPage playground with live token-savings counter. Next.js app arrives in Phase 4; this placeholder reserves the workspace.",
+  "license": "MIT"
+}

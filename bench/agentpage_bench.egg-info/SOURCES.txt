@@ -1,0 +1,9 @@
+README.md
+pyproject.toml
+agentpage_bench/__init__.py
+agentpage_bench.egg-info/PKG-INFO
+agentpage_bench.egg-info/SOURCES.txt
+agentpage_bench.egg-info/dependency_links.txt
+agentpage_bench.egg-info/requires.txt
+agentpage_bench.egg-info/top_level.txt
+tests/test_smoke.py
