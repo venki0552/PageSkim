@@ -1,8 +1,8 @@
 {
-  "name": "agentpage-monorepo",
+  "name": "pageskim-monorepo",
   "private": true,
   "version": "0.0.0",
-  "description": "AgentPage — a static-file format + tooling that makes any website readable by LLMs/agents at 10-50x fewer tokens than raw HTML",
+  "description": "PageSkim — a static-file format + tooling that makes any website readable by LLMs/agents at 10-50x fewer tokens than raw HTML",
   "license": "MIT",
   "engines": {
     "node": ">=20"
@@ -12,11 +12,11 @@
     "apps/*"
   ],
   "scripts": {
-    "build": "npm run build -w @agentpage/core && npm run build -w @agentpage/generator -w @agentpage/validator -w @agentpage/sdk",
+    "build": "npm run build -w @pageskim/core && npm run build -w @pageskim/generator -w @pageskim/validator -w @pageskim/sdk",
     "pretest": "npm run build",
     "test": "npm run test --workspaces --if-present",
     "lint": "eslint .",
-    "typecheck": "npm run build -w @agentpage/core && npm run typecheck --workspaces --if-present"
+    "typecheck": "npm run build -w @pageskim/core && npm run typecheck --workspaces --if-present"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",

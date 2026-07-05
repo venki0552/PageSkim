@@ -1,10 +1,10 @@
 import sys
 
-import agentpage_bench
+import pageskim_bench
 
 
 def test_package_imports():
-    assert agentpage_bench.__version__ == "0.0.0"
+    assert pageskim_bench.__version__ == "0.0.0"
 
 
 def test_python_version_meets_floor():

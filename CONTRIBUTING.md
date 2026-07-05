@@ -1,4 +1,4 @@
-# Contributing to AgentPage
+# Contributing to PageSkim
 
 Thanks for your interest! This document covers dev setup, PR rules, and the process for proposing changes to the format spec.
 
@@ -7,7 +7,7 @@ Thanks for your interest! This document covers dev setup, PR rules, and the proc
 Prerequisites: **Node.js ≥ 20**, **Python ≥ 3.11** (only for `bench/`), git.
 
 ```bash
-git clone <repo-url> && cd agentpage
+git clone <repo-url> && cd pageskim
 npm install                # installs all npm workspaces
 npm test                   # vitest across packages
 npm run lint               # eslint (flat config, typescript-eslint)

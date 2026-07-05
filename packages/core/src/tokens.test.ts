@@ -13,7 +13,7 @@ describe("countTokens", () => {
   });
 
   it("is deterministic", () => {
-    const text = "AgentPage makes websites readable by agents.";
+    const text = "PageSkim makes websites readable by agents.";
     expect(countTokens(text)).toBe(countTokens(text));
   });
 

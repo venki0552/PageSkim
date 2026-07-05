@@ -1,7 +1,7 @@
 {
-  "name": "@agentpage/core",
+  "name": "@pageskim/core",
   "version": "0.0.0",
-  "description": "Pure, isomorphic conversion library for the AgentPage format: parse HTML → extract → emit .llm.md/.llm.json. Single source of truth used by the CLI, browser SDK, and playground.",
+  "description": "Pure, isomorphic conversion library for the PageSkim format: parse HTML → extract → emit .llm.md/.llm.json. Single source of truth used by the CLI, browser SDK, and playground.",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",

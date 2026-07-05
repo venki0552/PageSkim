@@ -1,0 +1,9 @@
+README.md
+pyproject.toml
+pageskim_bench/__init__.py
+pageskim_bench.egg-info/PKG-INFO
+pageskim_bench.egg-info/SOURCES.txt
+pageskim_bench.egg-info/dependency_links.txt
+pageskim_bench.egg-info/requires.txt
+pageskim_bench.egg-info/top_level.txt
+tests/test_smoke.py

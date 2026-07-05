@@ -1,7 +1,7 @@
 {
-  "name": "@agentpage/sdk",
+  "name": "@pageskim/sdk",
   "version": "0.0.0",
-  "description": "Framework-free browser SDK for AgentPage: ESM + UMD builds of @agentpage/core for <script>/CDN use in any web page. Full API lands in Phase 4B.",
+  "description": "Framework-free browser SDK for PageSkim: ESM + UMD builds of @pageskim/core for <script>/CDN use in any web page. Full API lands in Phase 4B.",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -21,6 +21,6 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@agentpage/core": "0.0.0"
+    "@pageskim/core": "0.0.0"
   }
 }

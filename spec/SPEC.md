@@ -1,10 +1,10 @@
-# AgentPage Format Specification
+# PageSkim Format Specification
 
 **Status: placeholder — the v0.1 spec is written in Phase 1.**
 
 This document will normatively define:
 
-- Naming and discovery (`page.llm.md`, `page.llm.json`, `/.well-known/agentpage.json`)
+- Naming and discovery (`page.llm.md`, `page.llm.json`, `/.well-known/pageskim.json`)
 - The three-layer structure: HEADER (≤100 tokens target, 150 hard cap) / FACTS / CHUNKS
 - Exact grammar of the `.md` rendering and a JSON Schema for the `.json` rendering
 - TOON-style compact tabular facts encoding (headers, rows, escaping, when NOT to use it)

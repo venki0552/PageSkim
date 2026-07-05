@@ -1,8 +1,0 @@
-Metadata-Version: 2.4
-Name: agentpage-bench
-Version: 0.0.0
-Summary: Benchmark harness for the AgentPage format: accuracy and tokens-per-correct-answer across raw HTML, markdown, llms.txt-style, and AgentPage two-hop conditions.
-License: MIT
-Requires-Python: >=3.11
-Provides-Extra: dev
-Requires-Dist: pytest>=8; extra == "dev"

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { countTokens } from "@agentpage/core";
+import { countTokens } from "@pageskim/core";
 import { SPEC_VERSION, tokenCount } from "./index.js";
 
 describe("sdk", () => {

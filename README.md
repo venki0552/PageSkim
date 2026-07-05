@@ -1,8 +1,8 @@
-# AgentPage
+# PageSkim
 
 > **Status: early scaffold (pre-0.1).** The format spec, generator, validator, SDK, playground, and benchmarks are being built phase by phase. Nothing is published to npm yet.
 
-**AgentPage** is an open-source format + tooling that makes any website readable by LLMs and agents at **10–50x fewer tokens** than raw HTML — using only **static files**. No servers, no RAG pipelines, no vector databases required by adopters.
+**PageSkim** is an open-source format + tooling that makes any website readable by LLMs and agents at **10–50x fewer tokens** than raw HTML — using only **static files**. No servers, no RAG pipelines, no vector databases required by adopters.
 
 ## The idea in 30 seconds
 
@@ -22,12 +22,12 @@ Sibling content must be derivable from the human-visible HTML — a validator en
 | --- | --- |
 | [`spec/SPEC.md`](spec/SPEC.md) | Format spec v0.1 (Phase 1) |
 | [`packages/core`](packages/core) | Pure, isomorphic TS library: parse → extract → emit. Single source of truth for conversion logic |
-| [`packages/generator`](packages/generator) | CLI: `agentpage generate` |
-| [`packages/validator`](packages/validator) | CLI: `agentpage validate` |
+| [`packages/generator`](packages/generator) | CLI: `pageskim generate` |
+| [`packages/validator`](packages/validator) | CLI: `pageskim validate` |
 | [`packages/sdk`](packages/sdk) | Browser SDK (ESM + UMD) for any web page — no framework required |
 | [`apps/playground`](apps/playground) | Hosted playground with live token-savings counter (Next.js, Vercel) |
 | [`bench/`](bench) | Python benchmark harness (accuracy + tokens-per-correct-answer across formats) |
-| [`skills/agentpage`](skills/agentpage) | AI-assistant skill: "make my site agent-readable" |
+| [`skills/pageskim`](skills/pageskim) | AI-assistant skill: "make my site agent-readable" |
 | [`examples/`](examples) | Sample pages: article+infobox, docs, blog, product |
 
 ## Development
@@ -49,9 +49,9 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the full dev guide and the spec-chang
 ## Design rationale (evidence base)
 
 - Raw HTML carries ~67.6% token overhead vs. semantic content ([arXiv 2606.19116](https://arxiv.org/abs/2606.19116)); HTML→markdown alone yields 5–10x reductions (Cloudflare token analysis: 16,180 → 3,150 tokens on a sample post).
-- Prompt format can swing accuracy by up to 40% on smaller models; there is no universal best format ([arXiv 2411.10541](https://arxiv.org/abs/2411.10541)) — hence AgentPage is serialization-flexible (`.md` and `.json` are equivalent renderings).
+- Prompt format can swing accuracy by up to 40% on smaller models; there is no universal best format ([arXiv 2411.10541](https://arxiv.org/abs/2411.10541)) — hence PageSkim is serialization-flexible (`.md` and `.json` are equivalent renderings).
 - TOON-style tabular encoding uses ~40% fewer tokens than JSON at equal-or-better comprehension for uniform arrays ([toonformat.dev](https://toonformat.dev)).
-- Removing irrelevant context *improves* accuracy, not just cost ([LLMLingua, arXiv 2310.05736](https://arxiv.org/abs/2310.05736); [LongLLMLingua, arXiv 2310.06839](https://arxiv.org/abs/2310.06839) — up to 21.4% gains with ~4x fewer tokens). AgentPage's layered two-hop design is the zero-infrastructure static equivalent.
+- Removing irrelevant context *improves* accuracy, not just cost ([LLMLingua, arXiv 2310.05736](https://arxiv.org/abs/2310.05736); [LongLLMLingua, arXiv 2310.06839](https://arxiv.org/abs/2310.06839) — up to 21.4% gains with ~4x fewer tokens). PageSkim's layered two-hop design is the zero-infrastructure static equivalent.
 - Structuring prose into key-value formats hurts reasoning ([arXiv 2408.02442](https://arxiv.org/abs/2408.02442)) — hence prose stays prose in chunks.
 
 Token counts reported by the tooling are estimated (cl100k/o200k base); exact counts vary by model tokenizer.

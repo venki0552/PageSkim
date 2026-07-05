@@ -1,5 +1,5 @@
 name: Spec change (RFC)
-description: Propose a normative change to the AgentPage format (spec/SPEC.md)
+description: Propose a normative change to the PageSkim format (spec/SPEC.md)
 labels: [spec, rfc]
 body:
   - type: markdown

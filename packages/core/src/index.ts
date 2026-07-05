@@ -1,5 +1,5 @@
 /**
- * @agentpage/core — pure, isomorphic conversion library for the AgentPage format.
+ * @pageskim/core — pure, isomorphic conversion library for the PageSkim format.
  *
  * Invariants (see CONTRIBUTING.md):
  * - Runs unmodified in Node and the browser/edge. No Node-only APIs, no
@@ -13,5 +13,5 @@
 
 export { countTokens, TOKENIZER_LABEL, type TokenCount } from "./tokens.js";
 
-/** Version of the AgentPage format spec this library targets (spec/SPEC.md). */
+/** Version of the PageSkim format spec this library targets (spec/SPEC.md). */
 export const SPEC_VERSION = "0.1.0-dev";

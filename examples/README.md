@@ -1,6 +1,6 @@
 # Example pages
 
-Four sample pages exercising the main page types AgentPage targets. Later phases use them as generator/validator fixtures and for the token-reduction tables.
+Four sample pages exercising the main page types PageSkim targets. Later phases use them as generator/validator fixtures and for the token-reduction tables.
 
 | Directory | Page type | Exercises |
 | --- | --- | --- |

@@ -3,9 +3,9 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "agentpage-bench"
+name = "pageskim-bench"
 version = "0.0.0"
-description = "Benchmark harness for the AgentPage format: accuracy and tokens-per-correct-answer across raw HTML, markdown, llms.txt-style, and AgentPage two-hop conditions."
+description = "Benchmark harness for the PageSkim format: accuracy and tokens-per-correct-answer across raw HTML, markdown, llms.txt-style, and PageSkim two-hop conditions."
 requires-python = ">=3.11"
 license = { text = "MIT" }
 dependencies = []
@@ -14,7 +14,7 @@ dependencies = []
 dev = ["pytest>=8"]
 
 [tool.setuptools.packages.find]
-include = ["agentpage_bench*"]
+include = ["pageskim_bench*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

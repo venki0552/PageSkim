@@ -1,7 +1,7 @@
 import { countTokens as o200kCount } from "gpt-tokenizer/encoding/o200k_base";
 
 /**
- * All token numbers AgentPage reports are estimates from one fixed encoding,
+ * All token numbers PageSkim reports are estimates from one fixed encoding,
  * so they are comparable with each other but not exact for any given model.
  * Surface this label wherever counts are displayed.
  */
