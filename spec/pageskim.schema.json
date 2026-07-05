@@ -29,7 +29,11 @@
         "next": { "type": ["string", "null"] }
       }
     },
-    "hash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "hash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{16}$",
+      "description": "First 16 hex chars of the SHA-256 of normalized main-content text (spec §10)."
+    },
     "toc": {
       "type": "array",
       "items": {

@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { SPEC_VERSION, countTokens } from "./index.js";
+import { budgetUnits, SPEC_VERSION } from "./index.js";
+import { countTokens } from "./tokenizer.js";
 
-describe("countTokens", () => {
+describe("countTokens (tokenizer subpath)", () => {
   it("returns 0 for the empty string", () => {
     expect(countTokens("")).toBe(0);
   });
@@ -28,8 +29,17 @@ describe("countTokens", () => {
   });
 });
 
+describe("budgetUnits (spec §9)", () => {
+  it("is ceil(utf8 bytes / 4)", () => {
+    expect(budgetUnits("")).toBe(0);
+    expect(budgetUnits("abcd")).toBe(1);
+    expect(budgetUnits("abcde")).toBe(2);
+    expect(budgetUnits("é")).toBe(1); // 2 bytes
+  });
+});
+
 describe("SPEC_VERSION", () => {
-  it("is a semver-ish string", () => {
-    expect(SPEC_VERSION).toMatch(/^\d+\.\d+\.\d+/);
+  it("is a semver string", () => {
+    expect(SPEC_VERSION).toMatch(/^\d+\.\d+\.\d+$/);
   });
 });

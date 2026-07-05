@@ -13,7 +13,9 @@ Initial specification:
   selection, table classification, metadata harvest order).
 - Tokenizer-independent budget metric (`ceil(utf8_bytes/4)`); header target
   100 / cap 150 with deterministic overflow sequence.
-- SHA-256 content hash over normalized main-content text.
+- SHA-256 content hash over normalized main-content text, truncated to 16
+  hex characters (staleness detection, not adversarial integrity — saves
+  ~25 header tokens).
 - Split-file layout (`page.llm/`), site index (`/.well-known/pageskim.json`).
 - Trust rules: derivability, no additive content, validator obligations,
   consumer posture.

@@ -10,6 +10,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./tokenizer": {
+      "types": "./dist/tokenizer.d.ts",
+      "default": "./dist/tokenizer.js"
     }
   },
   "files": [
@@ -18,9 +22,12 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "vitest run",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "fixtures:update": "npm run build && node scripts/update-fixtures.mjs"
   },
   "dependencies": {
-    "gpt-tokenizer": "^3.0.0"
+    "domhandler": "^5.0.3",
+    "gpt-tokenizer": "^3.0.0",
+    "htmlparser2": "^10.0.0"
   }
 }

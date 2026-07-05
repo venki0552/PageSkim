@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { countTokens } from "@pageskim/core";
+import { budgetUnits } from "@pageskim/core";
 import { SPEC_VERSION, tokenCount } from "./index.js";
 
 describe("sdk", () => {
-  it("tokenCount matches core.countTokens exactly (single source of truth)", () => {
+  it("tokenCount matches core.budgetUnits (single source of truth)", () => {
     const text = "<h1>Same numbers everywhere</h1><p>CLI, SDK, playground.</p>";
-    expect(tokenCount(text)).toBe(countTokens(text));
+    expect(tokenCount(text)).toBe(budgetUnits(text));
   });
 
   it("re-exports the spec version", () => {
@@ -13,8 +13,6 @@ describe("sdk", () => {
   });
 
   it("is SSR-safe: importing did not require window/document", () => {
-    // This suite runs in Node (no DOM). Reaching this assertion proves the
-    // module graph imported cleanly without browser globals.
     expect(typeof globalThis.window).toBe("undefined");
   });
 });
