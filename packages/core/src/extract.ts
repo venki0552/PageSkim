@@ -192,7 +192,9 @@ export function classifyTable(el: Element): "infobox" | "data" | "layout" {
   if (Math.max(...rows.map((r) => r.length)) < 2) return "layout";
 
   const thTd = rows.filter((r) => r.length === 2 && tag(r[0]!) === "th" && tag(r[1]!) === "td");
-  if (thTd.length / rows.length >= 0.8) return "infobox";
+  // Real-world infoboxes (e.g. Wikipedia) mix in single-cell header/image
+  // rows; a solid block of th+td pairs is the signal, not the ratio alone.
+  if (thTd.length >= 4 || thTd.length / rows.length >= 0.8) return "infobox";
 
   const headerRow = rows.find((r) => r.length >= 2 && r.every((c) => tag(c) === "th"));
   if (headerRow && rows.filter((r) => r !== headerRow).length >= 2) return "data";

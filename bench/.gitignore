@@ -1,0 +1,4 @@
+# Cached provider calls and fetched snapshots (regenerable)
+.cache/
+data/articles/
+results/

@@ -352,8 +352,10 @@ Within main content:
 
 - **Layout table**: contains a nested `table`, or has no `th` cells, or has
   only one column. Its text is treated as ordinary inline content.
-- **Infobox table**: ≥80% of rows are exactly one `th` + one `td` → facts
-  key-values (§6.3).
+- **Infobox table**: at least 4 rows — or ≥80% of rows — are exactly one
+  `th` + one `td` → those rows become facts key-values (§6.3); other row
+  shapes in the same table are ignored. (The absolute threshold matters for
+  real-world infoboxes, which mix in single-cell header and image rows.)
 - **Data table**: has a header row (a `thead`, or a first `tr` of all `th`)
   with ≥2 columns and ≥2 data rows → facts table block.
 
