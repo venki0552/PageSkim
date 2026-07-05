@@ -2,6 +2,27 @@
   "name": "@pageskim/playground",
   "version": "0.0.0",
   "private": true,
-  "description": "Hosted PageSkim playground with live token-savings counter. Next.js app arrives in Phase 4; this placeholder reserves the workspace.",
-  "license": "MIT"
+  "description": "Hosted PageSkim playground: paste HTML or fetch a URL, see the .llm.md sibling, the live token-savings counter, and the two-hop retrieval simulator.",
+  "license": "MIT",
+  "scripts": {
+    "predev": "node scripts/embed-examples.mjs",
+    "prebuild": "node scripts/embed-examples.mjs",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "pretest": "node scripts/embed-examples.mjs",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@pageskim/core": "0.0.0",
+    "next": "^15.3.0",
+    "pageskim": "0.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0"
+  }
 }
