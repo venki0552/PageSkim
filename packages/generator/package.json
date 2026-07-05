@@ -1,0 +1,23 @@
+{
+  "name": "@agentpage/generator",
+  "version": "0.0.0",
+  "description": "CLI wrapper around @agentpage/core: agentpage generate <file|dir|-> — emits .llm.md/.llm.json sibling files.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "agentpage-generate": "./dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@agentpage/core": "0.0.0"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "@agentpage/validator",
+  "version": "0.0.0",
+  "description": "CLI wrapper around @agentpage/core: agentpage validate <page.html> <page.llm.md|dir> — structural conformance, hashes, anchors, grounding/anti-cloaking checks.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "agentpage-validate": "./dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@agentpage/core": "0.0.0"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "@agentpage/core",
+  "version": "0.0.0",
+  "description": "Pure, isomorphic conversion library for the AgentPage format: parse HTML → extract → emit .llm.md/.llm.json. Single source of truth used by the CLI, browser SDK, and playground.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "gpt-tokenizer": "^3.0.0"
+  }
+}
