@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+*.tsbuildinfo
+.next/
+out/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+bench/.cache/
+
+# Environment / editor
+.env
+.env.*
+.DS_Store
+.idea/
+.vscode/
+
+# Vercel
+.vercel/
+
+# Local working notes (not part of the OSS repo)
+prompt.md

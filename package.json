@@ -1,0 +1,28 @@
+{
+  "name": "agentpage-monorepo",
+  "private": true,
+  "version": "0.0.0",
+  "description": "AgentPage — a static-file format + tooling that makes any website readable by LLMs/agents at 10-50x fewer tokens than raw HTML",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm run build -w @agentpage/core && npm run build -w @agentpage/generator -w @agentpage/validator -w @agentpage/sdk",
+    "pretest": "npm run build",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "eslint .",
+    "typecheck": "npm run build -w @agentpage/core && npm run typecheck --workspaces --if-present"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "eslint": "^9.30.0",
+    "typescript": "^5.8.0",
+    "typescript-eslint": "^8.35.0",
+    "vitest": "^3.2.0"
+  }
+}
