@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pageskim.dev/schema/0.1/pageskim.schema.json",
+  "title": "PageSkim sibling document (.llm.json rendering), spec v0.1",
+  "type": "object",
+  "required": ["pageskim", "title", "summary", "type", "hash", "toc", "facts", "chunks"],
+  "additionalProperties": false,
+  "properties": {
+    "pageskim": {
+      "type": "string",
+      "pattern": "^0\\.1$",
+      "description": "Spec MAJOR.MINOR version this document conforms to."
+    },
+    "title": { "type": "string", "minLength": 1 },
+    "summary": { "type": "string", "minLength": 1 },
+    "type": { "enum": ["article", "docs", "product", "blog", "reference", "other"] },
+    "url": { "type": ["string", "null"], "format": "uri" },
+    "lang": { "type": ["string", "null"], "description": "BCP-47 language tag." },
+    "updated": {
+      "type": ["string", "null"],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "series": {
+      "type": "object",
+      "required": ["prev", "next"],
+      "additionalProperties": false,
+      "properties": {
+        "prev": { "type": ["string", "null"] },
+        "next": { "type": ["string", "null"] }
+      }
+    },
+    "hash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "toc": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "summary"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "#/$defs/chunkId" },
+          "summary": { "type": "string" }
+        }
+      }
+    },
+    "facts": {
+      "type": "object",
+      "required": ["kv", "tables"],
+      "additionalProperties": false,
+      "properties": {
+        "kv": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["key", "value"],
+            "additionalProperties": false,
+            "properties": {
+              "key": { "type": "string", "minLength": 1, "maxLength": 64 },
+              "value": { "type": "string" }
+            }
+          }
+        },
+        "tables": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "cols", "rows"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "$ref": "#/$defs/chunkId" },
+              "cols": { "type": "array", "minItems": 2, "items": { "type": "string" } },
+              "rows": {
+                "type": "array",
+                "minItems": 2,
+                "items": { "type": "array", "items": { "type": "string" } }
+              }
+            }
+          }
+        }
+      }
+    },
+    "chunks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "summary", "tags", "anchor", "text"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "#/$defs/chunkId" },
+          "summary": { "type": "string" },
+          "tags": { "type": "array", "items": { "type": "string" } },
+          "anchor": {
+            "type": ["string", "null"],
+            "pattern": "^#",
+            "description": "Fragment present in the page HTML, or null (= `anchor: none`)."
+          },
+          "text": { "type": "string" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "chunkId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "description": "Slug per spec §7.2. Unicode letters/digits/-/_ starting with letter or digit."
+    }
+  }
+}
