@@ -1,0 +1,62 @@
+name: "PageSkim generate + validate"
+description: >-
+  Generate PageSkim .llm.md sibling files for a built site and validate every
+  page/sibling pair. Makes any static site readable by LLMs and agents at
+  10-50x fewer tokens.
+branding:
+  icon: layers
+  color: blue
+
+inputs:
+  path:
+    description: "Directory of built HTML pages (e.g. dist, public, _site)."
+    required: true
+  base-url:
+    description: "Production origin used for pages without a canonical URL and for the site index."
+    required: false
+    default: ""
+  json:
+    description: "Also emit .llm.json mirrors (true/false)."
+    required: false
+    default: "true"
+  split:
+    description: "Also emit split directories, page.llm/ (true/false)."
+    required: false
+    default: "true"
+  site-index:
+    description: "Write .well-known/pageskim.json (true/false)."
+    required: false
+    default: "true"
+  validate:
+    description: "Validate every page/sibling pair after generating (true/false)."
+    required: false
+    default: "true"
+  version:
+    description: "pageskim npm version/tag to run."
+    required: false
+    default: "latest"
+
+runs:
+  using: composite
+  steps:
+    - name: Generate siblings
+      shell: bash
+      run: |
+        ARGS=("${{ inputs.path }}")
+        [[ "${{ inputs.json }}" == "true" ]] && ARGS+=(--json)
+        [[ "${{ inputs.split }}" == "true" ]] && ARGS+=(--split)
+        [[ "${{ inputs.site-index }}" == "true" ]] && ARGS+=(--site-index)
+        [[ -n "${{ inputs.base-url }}" ]] && ARGS+=(--base-url "${{ inputs.base-url }}")
+        npx --yes "pageskim@${{ inputs.version }}" generate "${ARGS[@]}"
+    - name: Validate siblings
+      if: ${{ inputs.validate == 'true' }}
+      shell: bash
+      run: |
+        STATUS=0
+        while IFS= read -r -d '' page; do
+          sibling="${page%.*}.llm.md"
+          if [[ -f "$sibling" ]]; then
+            npx --yes "pageskim@${{ inputs.version }}" validate "$page" "$sibling" || STATUS=1
+          fi
+        done < <(find "${{ inputs.path }}" -name '*.html' ! -name '*.llm.*' -print0)
+        exit "$STATUS"
