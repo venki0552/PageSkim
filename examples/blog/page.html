@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>We cut our home lab's power bill by 40% — measured, not vibes | Maren's Notes</title>
+  <meta name="description" content="A month of watt-meter data, three hardware changes and two scheduler tricks that cut a five-node home lab from 210W idle to 126W.">
+  <meta name="author" content="Maren Okafor">
+  <meta property="og:title" content="We cut our home lab's power bill by 40% — measured, not vibes">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://notes.maren.example.net/2026/homelab-power">
+  <meta property="og:image" content="https://notes.maren.example.net/img/homelab-meter.jpg">
+  <meta property="article:published_time" content="2026-05-18T08:30:00Z">
+  <meta property="article:author" content="Maren Okafor">
+  <link rel="canonical" href="https://notes.maren.example.net/2026/homelab-power">
+  <style>
+    body { font-family: "Iowan Old Style", Georgia, serif; margin: 0; line-height: 1.6; color: #222; }
+    header.site { padding: 16px 24px; border-bottom: 3px solid #222; display: flex; justify-content: space-between; }
+    article { max-width: 680px; margin: 0 auto; padding: 32px 16px; }
+    .byline { color: #666; font-size: 90%; }
+    figure { margin: 24px 0; } figcaption { font-size: 85%; color: #666; }
+    .cookie-banner { position: fixed; bottom: 0; width: 100%; background: #222; color: #fff; padding: 12px 24px; }
+    .newsletter { border: 2px dashed #888; padding: 16px; margin: 32px 0; }
+    footer.site { border-top: 3px solid #222; padding: 24px; font-size: 85%; }
+  </style>
+</head>
+<body>
+  <header class="site">
+    <strong><a href="/">Maren's Notes</a></strong>
+    <nav aria-label="Site">
+      <a href="/archive">Archive</a> · <a href="/about">About</a> · <a href="/rss.xml">RSS</a>
+    </nav>
+  </header>
+
+  <article>
+    <h1 id="homelab-power">We cut our home lab's power bill by 40% — measured, not vibes</h1>
+    <p class="byline">By Maren Okafor · 18 May 2026 · 9 min read · <a href="/tags/homelab">#homelab</a> <a href="/tags/energy">#energy</a></p>
+
+    <p>Every home-lab post about power savings I've read ends with "it feels snappier and the bill seems lower." This one doesn't. I put a calibrated watt-meter on the rack for a month before touching anything, made one change per week, and kept the meter logging the whole time. Baseline: five nodes drawing a steady 210 W at idle, which at our tariff of €0.31/kWh works out to €571 a year for machines that were mostly waiting for cron jobs.</p>
+
+    <h2 id="the-baseline">The baseline: what 210 watts actually was</h2>
+    <p>The rack held two ex-office Dell towers (a 2019 Precision and an older OptiPlex), a Ryzen NAS build, a Raspberry Pi 4 running DNS, and an aging Xeon workstation I kept "for big compiles" and used roughly monthly. Per-device metering told a clear story: the Xeon alone idled at 68 W — a third of the total — and the two Dells together idled at 74 W. The NAS, with six spinning drives, sat at 52 W. The Pi rounded things out at 4 W, the switch at 12 W.</p>
+
+    <figure>
+      <img src="img/homelab-meter.jpg" alt="A DIN-rail power meter showing 209.7 watts, mounted beside a small server rack" width="680" height="400">
+      <figcaption>Week zero: the meter that started the argument with myself.</figcaption>
+    </figure>
+
+    <h2 id="change-1-kill-the-xeon">Change 1: the Xeon had to go</h2>
+    <p>The monthly big-compile job moved to the Ryzen box, which finishes it 20% slower — an extra 11 minutes once a month, in exchange for 68 W around the clock. The Xeon sold for €140, which also paid for the meter and the SSDs in change 3. New idle: 142 W. This was the whole game, honestly; everything after was refinement.</p>
+
+    <h2 id="change-2-scheduler-tricks">Change 2: two scheduler tricks</h2>
+    <p>First trick: the two Dells only exist to run weekend batch simulations, so they now suspend to RAM on weekdays and wake on LAN from a 40-line systemd timer on the Pi. Suspend draws 2 W each versus 37 W idling. Second trick: the NAS spins drives down after 20 minutes, but backups used to trickle in all evening and keep resetting the timer — batching every client's backup into one 02:00 window means the drives sleep 21 hours a day instead of 9. Together: −49 W on the weekly average. New average draw: 93 W weekdays, 126 W overall.</p>
+
+    <h2 id="change-3-storage">Change 3: spinning rust to SSD, selectively</h2>
+    <p>Only the two most-accessed drives (media metadata and the backup staging volume) moved to used enterprise SSDs; the four bulk archive drives stayed. That kept costs at €118 and shaved a further 9 W of average draw, because the staging volume no longer wakes the whole array for small writes. Full-array SSD would have cost ~€900 to save the remaining ~20 W — a 14-year payback I declined.</p>
+
+    <h2 id="results">Results and what I'd skip</h2>
+    <p>Final numbers after four weeks of post-change logging: 126 W average draw, down from 210 W — exactly 40%, or €229/year at our tariff. Total spend net of selling the Xeon: −€22. The thing I'd skip next time: undervolting the Ryzen. Two evenings of stability testing bought 4 W and one mysterious crash a fortnight later that cost me a Saturday morning. The boring changes — turn things off, batch the work — did 90% of the saving.</p>
+
+    <div class="newsletter">
+      <p><strong>Enjoyed this?</strong> I write about one measured experiment a month. No spam, unsubscribe anytime.</p>
+      <form action="/subscribe" method="post"><input type="email" placeholder="you@example.com" aria-label="Email address"><button>Subscribe</button></form>
+    </div>
+
+    <section id="comments" aria-label="Comments">
+      <h2 id="comments-heading">Comments (3)</h2>
+      <p>Comments are moderated and appear within a day. <a href="/comment-policy">Comment policy</a>.</p>
+    </section>
+  </article>
+
+  <footer class="site">
+    <p>© 2020–2026 Maren Okafor · <a href="/imprint">Imprint</a> · <a href="/privacy">Privacy</a> · Content licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+  </footer>
+
+  <div class="cookie-banner" role="dialog" aria-label="Cookie notice">
+    <p>This site uses one strictly-necessary cookie and no trackers. <button>OK</button> <a href="/privacy">Details</a></p>
+  </div>
+</body>
+</html>

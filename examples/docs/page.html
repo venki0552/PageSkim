@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Configuration Reference | gridctl Documentation</title>
+  <meta name="description" content="Complete configuration reference for gridctl, the command-line scheduler for batch compute grids: file format, all options, environment variables and examples.">
+  <link rel="canonical" href="https://docs.gridctl.example.com/reference/configuration">
+  <style>
+    body { font-family: -apple-system, "Segoe UI", sans-serif; margin: 0; color: #1b1f24; }
+    .topbar { display: flex; gap: 24px; padding: 12px 24px; border-bottom: 1px solid #d0d7de; }
+    .layout { display: grid; grid-template-columns: 260px 1fr; }
+    .sidenav { border-right: 1px solid #d0d7de; padding: 16px; font-size: 14px; }
+    .sidenav ul { list-style: none; padding-left: 12px; }
+    main { padding: 24px 40px; max-width: 860px; }
+    pre { background: #f6f8fa; padding: 12px; border-radius: 6px; overflow-x: auto; }
+    code { font-family: ui-monospace, SFMono-Regular, monospace; font-size: 13px; }
+    table.opts { border-collapse: collapse; width: 100%; font-size: 14px; }
+    table.opts th, table.opts td { border: 1px solid #d0d7de; padding: 6px 10px; text-align: left; }
+    .admonition { border-left: 4px solid #0969da; background: #ddf4ff; padding: 8px 16px; margin: 16px 0; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <strong>gridctl docs</strong>
+    <nav aria-label="Primary">
+      <a href="/getting-started">Getting started</a>
+      <a href="/guides">Guides</a>
+      <a href="/reference">Reference</a>
+      <a href="/changelog">Changelog</a>
+      <a href="https://github.example.com/gridctl/gridctl">GitHub</a>
+    </nav>
+    <form role="search"><input type="search" placeholder="Search docs…" aria-label="Search docs"></form>
+  </header>
+
+  <div class="layout">
+    <nav class="sidenav" aria-label="Section">
+      <p><strong>Reference</strong></p>
+      <ul>
+        <li><a href="/reference/cli">CLI commands</a></li>
+        <li><a href="/reference/configuration" aria-current="page">Configuration</a></li>
+        <li><a href="/reference/job-spec">Job spec</a></li>
+        <li><a href="/reference/scheduler">Scheduler internals</a></li>
+        <li><a href="/reference/exit-codes">Exit codes</a></li>
+        <li><a href="/reference/glossary">Glossary</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <article>
+        <h1 id="configuration-reference">Configuration reference</h1>
+        <p>gridctl reads its configuration from a single TOML file. This page documents every option, the resolution order, and the environment variables that override the file. Configuration applies to the client; per-job settings belong in the <a href="/reference/job-spec">job spec</a> instead.</p>
+
+        <h2 id="file-location">File location and resolution order</h2>
+        <p>gridctl looks for configuration in the following order, using the first file it finds. Later sources never merge into earlier ones; resolution stops at the first match.</p>
+        <ol>
+          <li>Path given with <code>--config &lt;path&gt;</code></li>
+          <li><code>$GRIDCTL_CONFIG</code> if set</li>
+          <li><code>./gridctl.toml</code> in the working directory</li>
+          <li><code>$XDG_CONFIG_HOME/gridctl/config.toml</code> (defaults to <code>~/.config/gridctl/config.toml</code>)</li>
+        </ol>
+
+        <div class="admonition">
+          <p><strong>Note:</strong> if no file is found, gridctl runs with built-in defaults and prints a one-line notice to stderr. Use <code>gridctl config show --effective</code> to see the merged result of defaults, file and environment.</p>
+        </div>
+
+        <h2 id="minimal-example">Minimal example</h2>
+        <p>A working configuration needs only the cluster endpoint and a default queue:</p>
+        <pre><code># gridctl.toml
+[cluster]
+endpoint = "grid.internal.example.com:7443"
+tls = true
+
+[defaults]
+queue = "standard"
+max_retries = 2
+</code></pre>
+
+        <h2 id="cluster-options">[cluster] options</h2>
+        <table class="opts">
+          <thead>
+            <tr><th>Option</th><th>Type</th><th>Default</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>endpoint</code></td><td>string</td><td>—</td><td>Host:port of the grid API server. Required.</td></tr>
+            <tr><td><code>tls</code></td><td>bool</td><td><code>true</code></td><td>Use TLS for all API connections.</td></tr>
+            <tr><td><code>ca_bundle</code></td><td>path</td><td>system store</td><td>PEM bundle used to verify the server certificate.</td></tr>
+            <tr><td><code>connect_timeout_ms</code></td><td>int</td><td><code>5000</code></td><td>TCP connect timeout in milliseconds.</td></tr>
+            <tr><td><code>keepalive_s</code></td><td>int</td><td><code>30</code></td><td>gRPC keepalive interval in seconds. 0 disables.</td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="defaults-options">[defaults] options</h2>
+        <table class="opts">
+          <thead>
+            <tr><th>Option</th><th>Type</th><th>Default</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>queue</code></td><td>string</td><td><code>"default"</code></td><td>Queue used when a job spec omits one.</td></tr>
+            <tr><td><code>max_retries</code></td><td>int</td><td><code>0</code></td><td>Automatic retries for jobs that exit non-zero.</td></tr>
+            <tr><td><code>priority</code></td><td>int</td><td><code>100</code></td><td>Job priority, 0–1000. Higher schedules earlier.</td></tr>
+            <tr><td><code>output_dir</code></td><td>path</td><td><code>"./grid-out"</code></td><td>Where job stdout/stderr bundles are written.</td></tr>
+            <tr><td><code>notify</code></td><td>string</td><td><code>"never"</code></td><td>One of <code>never</code>, <code>on-failure</code>, <code>always</code>.</td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="environment-variables">Environment variables</h2>
+        <p>Every option can be overridden with an environment variable named <code>GRIDCTL_&lt;SECTION&gt;_&lt;OPTION&gt;</code>, uppercased. Environment variables take precedence over the file but not over command-line flags.</p>
+        <pre><code>export GRIDCTL_CLUSTER_ENDPOINT="staging.grid.example.com:7443"
+export GRIDCTL_DEFAULTS_QUEUE="preemptible"
+gridctl submit train.job          # uses staging + preemptible
+gridctl submit train.job --queue=standard   # flag wins
+</code></pre>
+
+        <h2 id="validation">Validation</h2>
+        <p>Run <code>gridctl config validate</code> to check a file without contacting the cluster. Unknown keys are errors, not warnings, to catch typos like <code>max_retrys</code>. The command exits 0 on success, 2 on validation failure, matching the <a href="/reference/exit-codes">global exit-code table</a>.</p>
+        <pre><code>$ gridctl config validate --config ./gridctl.toml
+gridctl.toml:14: unknown key "max_retrys" in [defaults] (did you mean "max_retries"?)
+</code></pre>
+
+        <h2 id="migrating-from-v1">Migrating from v1</h2>
+        <p>Version 2 renamed the <code>[server]</code> section to <code>[cluster]</code> and moved retry settings from <code>[retry]</code> into <code>[defaults]</code>. Run <code>gridctl config migrate</code> to rewrite a v1 file in place; a backup is written alongside with a <code>.v1.bak</code> suffix. The v1 format is read-only supported until gridctl 2.4 and removed in 2.5.</p>
+      </article>
+
+      <nav aria-label="Page footer">
+        <p><a href="/reference/cli">← CLI commands</a> · <a href="/reference/job-spec">Job spec →</a></p>
+      </nav>
+    </main>
+  </div>
+
+  <footer>
+    <p>© 2026 gridctl contributors · <a href="/license">Apache-2.0</a> · <a href="/privacy">Privacy</a> · Built with DocForge 3.2</p>
+  </footer>
+</body>
+</html>
