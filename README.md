@@ -26,7 +26,11 @@ npx pageskim generate ./site --json --split --site-index --base-url https://exam
 npx pageskim validate ./site/page.html ./site/page.llm.md
 ```
 
-That's the whole deployment: static files next to your pages, plus `/.well-known/pageskim.json` so agents can discover them. Framework recipes (Next.js, Astro, Hugo, Jekyll): [docs/adapters.md](docs/adapters.md). One-tag browser usage:
+That's the whole deployment: static files next to your pages, plus `/.well-known/pageskim.json` so agents can discover them.
+
+**Guides:** [Adopting PageSkim properly](docs/integration.md) (publishers: serving, discovery, CI, authoring tips) · [Consuming PageSkim](docs/consuming.md) (agent/tool developers: discovery, two-hop client code, trust posture) · [Framework adapters](docs/adapters.md) (Next.js, Astro, Hugo, Jekyll) · [SDK recipes](packages/sdk/README.md) (React, Vue, WordPress, extensions).
+
+One-tag browser usage:
 
 ```html
 <script src="https://unpkg.com/pageskim/dist/pageskim.min.js"></script>

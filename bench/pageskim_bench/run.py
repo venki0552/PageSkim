@@ -77,8 +77,23 @@ def mean_ci(values: list[float]) -> tuple[float, float]:
 
 def run_benchmark(args: argparse.Namespace) -> dict:
     provider = CachedProvider(make_provider(args.provider))
-    titles = default_titles()[: args.articles]
+    if args.titles_file:
+        titles = [
+            t.strip()
+            for t in Path(args.titles_file).read_text().splitlines()
+            if t.strip() and not t.startswith("#")
+        ]
+    else:
+        titles = default_titles()
+    titles = titles[: args.articles]
     cli = REPO_ROOT / "packages" / "generator" / "dist" / "cli.js"
+
+    external: list[Question] = []
+    if args.external_jsonl:
+        from .qa import load_external_jsonl
+
+        external = load_external_jsonl(Path(args.external_jsonl), set(titles))
+        print(f"[external] {len(external)} questions matched fetched articles")
 
     trials: list[Trial] = []
     dropped_articles = 0
@@ -97,7 +112,7 @@ def run_benchmark(args: argparse.Namespace) -> dict:
             dropped_articles += 1
             continue
         sibling = parse_sibling_md(sibling_md)
-        questions = infobox_questions(sibling)
+        questions = infobox_questions(sibling) + [q for q in external if q.article == title]
         if not questions:
             dropped_articles += 1
             continue
@@ -149,6 +164,18 @@ def aggregate(trials: list[Trial], provider_name: str, dropped_articles: int, dr
         total_out = sum(t.output_tokens for t in rows)
         n_correct = sum(1 for t in rows if t.correct)
         cost = total_in / 1e6 * PRICE_INPUT_PER_MTOK + total_out / 1e6 * PRICE_OUTPUT_PER_MTOK
+        # Per-article breakdown: lets readers see variance across page shapes
+        # instead of one blended number.
+        per_article: dict[str, dict] = {}
+        for article in sorted({t.article for t in rows}):
+            article_rows = [t for t in rows if t.article == article]
+            per_article[article] = {
+                "trials": len(article_rows),
+                "accuracy": round(sum(t.correct for t in article_rows) / len(article_rows), 4),
+                "input_tokens_mean": round(
+                    statistics.fmean(t.input_tokens for t in article_rows), 1
+                ),
+            }
         conditions[condition] = {
             "trials": len(rows),
             "accuracy_mean": round(acc_mean, 4),
@@ -158,10 +185,13 @@ def aggregate(trials: list[Trial], provider_name: str, dropped_articles: int, dr
             "tokens_per_correct": round(total_in / n_correct, 1) if n_correct else None,
             "dollars_per_correct": round(cost / n_correct, 6) if n_correct else None,
             "truncated_trials": sum(1 for t in rows if t.truncated),
+            "per_article": per_article,
         }
     return {
         "provider": provider_name,
         "runs_per_condition": RUNS_PER_CONDITION,
+        "articles": sorted({t.article for t in trials}),
+        "questions": len({(t.article, t.question) for t in trials}),
         "dropped_articles": dropped_articles,
         "dropped_questions": dropped_questions,
         "conditions": conditions,
@@ -203,7 +233,13 @@ def write_outputs(trials: list[Trial], report: dict) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description="PageSkim benchmark harness")
     parser.add_argument("--provider", default="fake", help="fake | anthropic | anthropic:<model>")
-    parser.add_argument("--articles", type=int, default=10)
+    parser.add_argument("--articles", type=int, default=10, help="first N titles from the list")
+    parser.add_argument("--titles-file", default=None, help="custom corpus: one Wikipedia title per line")
+    parser.add_argument(
+        "--external-jsonl",
+        default=None,
+        help='extra questions: JSONL of {"question","answer","title"} (e.g. NQ/HotpotQA subsets)',
+    )
     parser.add_argument("--siblings-dir", default=None, help="pre-generated .llm.md files (skip node CLI)")
     run_benchmark(parser.parse_args())
 

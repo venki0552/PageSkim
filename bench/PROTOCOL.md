@@ -65,6 +65,15 @@ with an explicit `[truncated]` marker; truncation events are reported.
 - Outputs: `bench/results/results.csv`, `report.md`, `results.json` (the
   playground About page can embed the JSON).
 
+## Amendments
+
+- **2026-07-05 (before first full real run):** the committed title list was
+  extended from 10 to 30 articles across six page-shape groups. The
+  pre-registered set is unchanged and remains the first 10 titles (the
+  default `--articles 10`); results on the extended set are reported
+  separately. Added `--titles-file` and `--external-jsonl` inputs; per-article
+  breakdowns added to `results.json`. No metric or judging changes.
+
 ## Exclusions
 
 - Questions whose gold answer appears in no condition's context are dropped

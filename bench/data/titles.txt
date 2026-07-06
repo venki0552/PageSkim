@@ -1,4 +1,9 @@
-# Committed article list (PROTOCOL.md): factual pages with rich infoboxes.
+# Committed article list (PROTOCOL.md). Grouped for coverage across page
+# "shapes" — infobox-heavy, biography, science, event, organization, place.
+# Order matters: --articles N takes the first N, so the default 10 (the
+# pre-registered set) stays first for comparability with earlier runs.
+
+# — pre-registered default set (runs 1..10) —
 Lighthouse of Alexandria
 Great Pyramid of Giza
 Hanging Gardens of Babylon
@@ -9,3 +14,33 @@ Statue of Zeus at Olympia
 Eiffel Tower
 Golden Gate Bridge
 Sydney Opera House
+
+# — biographies —
+Ada Lovelace
+Marie Curie
+Alan Turing
+Grace Hopper
+Katherine Johnson
+
+# — science & technology —
+Photosynthesis
+CRISPR gene editing
+James Webb Space Telescope
+Transistor
+Penicillin
+
+# — events —
+Apollo 11
+1906 San Francisco earthquake
+Berlin Wall
+Suez Canal
+
+# — organizations & works —
+World Health Organization
+CERN
+Voyager 1
+International Space Station
+
+# — places —
+Yellowstone National Park
+Machu Picchu
