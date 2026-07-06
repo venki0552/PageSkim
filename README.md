@@ -79,7 +79,7 @@ Run it yourself: `python -m pageskim_bench.run --provider anthropic --articles 1
 | [`packages/sdk`](packages/sdk) | `pageskim` on npm: browser SDK (ESM + `<script>`) and umbrella CLI |
 | [`apps/playground`](apps/playground) | Hosted playground: token counter, two-hop simulator, free `/api/convert` |
 | [`bench/`](bench) | Python benchmark harness (pre-registered protocol) |
-| [`skills/pageskim`](skills/pageskim) | AI-assistant skill: "make my site agent-readable" |
+| [`skills/pageskim`](skills/pageskim) | Agent skill: "make my site agent-readable" — install with `npx skills add venki0552/PageSkim` ([skills.sh](https://skills.sh)) |
 | [`.github/action.yml`](.github/action.yml) | GitHub Action: generate + validate in CI |
 | [`examples/`](examples) | Sample pages (article, docs, blog, product) |
 

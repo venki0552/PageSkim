@@ -32,6 +32,16 @@ cd packages/sdk       && npm publish --access public && cd ../..
 
 Verify: `npx pageskim@0.1.0 generate --help` and the unpkg script tag on `packages/sdk/fixtures/demo.html`.
 
+### Skill distribution (skills.sh + ClawHub)
+- [x] Skill at `skills/pageskim/SKILL.md` verified installable: `npx skills add venki0552/PageSkim` (works for Claude Code, Cursor, and 70+ agents via the [skills CLI](https://github.com/vercel-labs/skills)).
+- [ ] skills.sh listing is **telemetry-based, not a PR**: it appears on the directory as installs happen through the CLI. Seed it by running the install yourself once and putting the `npx skills add` one-liner in announcements.
+- [ ] ClawHub (OpenClaw's registry, clawhub.ai): requires a GitHub account ≥1 week old. `npm i -g clawhub` (or npx), then:
+  ```bash
+  clawhub login
+  clawhub skill publish ./skills/pageskim --slug pageskim --name "PageSkim" --version 1.0.0
+  ```
+  If the `pageskim` slug is taken, retry with `--slug cs-pageskim`. Future updates: `clawhub sync` bumps changed skills automatically.
+
 ## Announcement draft
 
 **Title:** PageSkim — give every page on your site a 10–50x cheaper twin for LLMs and agents (static files, no servers)
