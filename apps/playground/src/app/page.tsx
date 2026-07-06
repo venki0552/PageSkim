@@ -12,6 +12,7 @@ type Mode = "paste" | "url";
 interface Stats {
   conversions: number;
   tokensSaved: number;
+  persistent?: boolean;
 }
 
 export default function Playground() {
@@ -185,8 +186,9 @@ export default function Playground() {
             <p className="counter-line">
               Tokens saved by this playground so far:{" "}
               <strong>{stats.tokensSaved.toLocaleString()}</strong> across{" "}
-              <strong>{stats.conversions.toLocaleString()}</strong> conversions. No page content is
-              stored — just this counter.
+              <strong>{stats.conversions.toLocaleString()}</strong> conversions
+              {stats.persistent ? "" : " (since last deploy)"}. No page content is stored — just
+              this counter.
             </p>
           )}
         </section>
