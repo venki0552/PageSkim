@@ -4,6 +4,7 @@ import { useMemo, useRef, useState } from "react";
 import type { ConvertPayload } from "@/worker/protocol";
 import { highlightJson, highlightMd } from "@/lib/highlight";
 import { buildZip } from "@/lib/zip";
+import { CheckIcon, CopyIcon, DownloadIcon } from "@/components/Icons";
 
 const TABS = ["llm.md", "llm.json", "split files", "extracted"] as const;
 type Tab = (typeof TABS)[number];
@@ -78,6 +79,7 @@ export function OutputTabs({ result }: { result: ConvertPayload }) {
         <div className="tab-actions">
           {tab !== "split files" && (
             <button type="button" className="btn-secondary" onClick={copy}>
+              {copied ? <CheckIcon size={13} /> : <CopyIcon size={13} />}
               {copied ? "Copied!" : "Copy"}
             </button>
           )}
@@ -94,6 +96,7 @@ export function OutputTabs({ result }: { result: ConvertPayload }) {
               }
             }}
           >
+            <DownloadIcon size={13} />
             Download{tab === "split files" ? " zip" : ""}
           </button>
         </div>
@@ -109,9 +112,10 @@ export function OutputTabs({ result }: { result: ConvertPayload }) {
                 <button
                   type="button"
                   className="btn-secondary"
+                  aria-label={`Download ${name}`}
                   onClick={() => download(name, content, "text/markdown")}
                 >
-                  ↓
+                  <DownloadIcon size={13} />
                 </button>
               </span>
             </div>

@@ -15,10 +15,10 @@
 - [ ] Tag `v0.1.0`; spec CHANGELOG entry finalized (done).
 
 ### Vercel deploy
-- [ ] Import repo → root directory `apps/playground` (keep "Include source files outside of the Root Directory" enabled). `apps/playground/vercel.json` supplies the monorepo install/build commands — verified locally from a clean state.
+- [x] Deployed: https://page-skim.vercel.app — root directory `apps/playground` (keep "Include source files outside of the Root Directory" enabled). `apps/playground/vercel.json` supplies the monorepo install/build commands — verified locally from a clean state.
 - [ ] Optional: add Vercel KV, set `KV_REST_API_URL` + `KV_REST_API_TOKEN` (aggregate counter persists; otherwise in-memory fallback works).
 - [ ] Smoke test: `/` converts an example; URL mode on a Wikipedia page; `/api/convert` via curl; `/about` renders; dark mode toggle.
-- [ ] Set the production URL in the README "Playground API" section and the Deploy button URL.
+- [x] Production URL set in README/About (https://page-skim.vercel.app).
 
 ### npm publish
 Account has 2FA, so publishing is interactive (browser OTP prompt per package). Prerequisite: create the free npm org **`pageskim`** at npmjs.com/org/create (the three scoped packages 404 without it). Then, in order:

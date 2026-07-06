@@ -62,7 +62,9 @@ body {
   background: var(--bg);
   z-index: 20;
 }
-.brand { font-weight: 700; font-size: 18px; text-decoration: none; color: var(--text); }
+.brand { font-weight: 700; font-size: 18px; text-decoration: none; color: var(--text); display: inline-flex; align-items: center; gap: 8px; }
+.brand-mark { flex-shrink: 0; }
+.nav-icon-link { display: inline-flex; align-items: center; gap: 5px; }
 .badge-mini {
   font-size: 11px; font-weight: 600; color: var(--accent);
   background: var(--accent-soft); border-radius: 10px; padding: 2px 8px; vertical-align: 2px;
@@ -72,8 +74,19 @@ body {
 .site-header nav a:hover { color: var(--text); }
 .theme-toggle {
   border: 1px solid var(--border); background: transparent; color: var(--text);
-  border-radius: 8px; padding: 2px 9px; cursor: pointer; font-size: 15px;
+  border-radius: 8px; padding: 4px 9px; cursor: pointer;
+  display: inline-flex; align-items: center;
 }
+.theme-toggle span { display: none; line-height: 0; }
+/* Light theme (explicit or default): offer the moon. Dark: offer the sun. */
+.theme-toggle .icon-moon { display: inline-flex; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+[data-theme="dark"] .theme-toggle .icon-sun { display: inline-flex; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: none; }
+  :root:not([data-theme="light"]) .theme-toggle .icon-sun { display: inline-flex; }
+}
+.btn-secondary { display: inline-flex; align-items: center; gap: 5px; }
 
 main { max-width: 1200px; margin: 0 auto; padding: 24px; }
 .site-footer {

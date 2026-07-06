@@ -1,11 +1,28 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GitHubIcon, LogoIcon, MoonIcon, SunIcon } from "@/components/Icons";
 import "./globals.css";
 
+const SITE_URL = "https://page-skim.vercel.app";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "PageSkim Playground — make any page readable by agents",
   description:
     "Paste HTML or a URL and watch it become a compact .llm.md sibling: 10-50x fewer tokens for LLMs and agents, with a live savings counter.",
+  openGraph: {
+    title: "PageSkim — make any page readable by agents",
+    description:
+      "10–50x fewer tokens for LLMs and agents, with static files only. Try the live converter and two-hop simulator.",
+    url: SITE_URL,
+    siteName: "PageSkim Playground",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "PageSkim — make any page readable by agents",
+    description: "10–50x fewer tokens for LLMs and agents, with static files only.",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -20,22 +37,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <header className="site-header">
           <Link href="/" className="brand">
-            <span aria-hidden="true">⤵</span> PageSkim <span className="badge-mini">playground</span>
+            <LogoIcon size={22} className="brand-mark" /> PageSkim{" "}
+            <span className="badge-mini">playground</span>
           </Link>
           <nav aria-label="Site">
             <Link href="/">Convert</Link>
             <Link href="/about">About</Link>
-            <a href="https://github.com/venki0552/PageSkim" rel="noopener">
-              GitHub
+            <a href="https://github.com/venki0552/PageSkim" rel="noopener" className="nav-icon-link">
+              <GitHubIcon size={15} /> GitHub
             </a>
-            <button
-              type="button"
-              className="theme-toggle"
-              aria-label="Toggle dark mode"
-              // Toggle relative to the currently applied theme.
-              dangerouslySetInnerHTML={{ __html: "◐" }}
-              data-theme-toggle
-            />
+            <button type="button" className="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle>
+              <span className="icon-moon">
+                <MoonIcon size={15} />
+              </span>
+              <span className="icon-sun">
+                <SunIcon size={15} />
+              </span>
+            </button>
           </nav>
         </header>
         <script

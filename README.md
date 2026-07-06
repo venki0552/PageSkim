@@ -7,6 +7,8 @@
 
 **Make any website readable by LLMs and agents at 10–50x fewer tokens — with static files only.** No servers, no RAG pipeline, no vector database. For every `page.html`, PageSkim emits a compact sibling `page.llm.md` that agents fetch instead of the raw page.
 
+**▶ Try it live: [page-skim.vercel.app](https://page-skim.vercel.app)** — paste any HTML or URL, watch the token counter, run the two-hop simulator.
+
 <!-- TODO(launch): hero GIF — record the playground converting the Wikipedia
      Lighthouse of Alexandria page (142,687 → 7,625 → 165 tokens) and drop it
      here as docs/hero.gif. -->
@@ -86,7 +88,7 @@ Run it yourself: `python -m pageskim_bench.run --provider anthropic --articles 1
 The playground doubles as a free API:
 
 ```bash
-curl -X POST https://<playground-host>/api/convert \
+curl -X POST https://page-skim.vercel.app/api/convert \
   -H "Content-Type: application/json" \
   -d '{"url": "https://en.wikipedia.org/wiki/Lighthouse_of_Alexandria"}'
 # → { llmMd, llmJson, splitFiles, tokenReport, warnings, doc }
