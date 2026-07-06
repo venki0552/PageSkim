@@ -32,6 +32,9 @@ bench/.venv/bin/pytest bench
 
 ## Pull requests
 
+- `main` is protected by a ruleset (see `.github/rulesets/`): changes land via
+  pull request, both CI checks must pass, merges are squash-only (keeps a
+  linear, signed history), and force pushes/deletions are blocked.
 - One logical change per PR; keep diffs focused.
 - Conventional commit messages: `feat(core): …`, `fix(validator): …`, `docs(spec): …`, `test: …`, `chore: …`.
 - All PRs need green CI (lint, test, build) and tests for behavior changes.
