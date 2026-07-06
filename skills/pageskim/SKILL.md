@@ -60,7 +60,7 @@ Use the repo's composite action, or the raw commands:
 
 ```yaml
 - run: npm run build
-- uses: pageskim/pageskim/.github/action@main
+- uses: venki0552/PageSkim/.github/action@main
   with:
     path: <output-dir>
     base-url: <site-url>

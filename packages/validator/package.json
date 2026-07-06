@@ -22,12 +22,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pageskim/pageskim.git",
+    "url": "git+https://github.com/venki0552/PageSkim.git",
     "directory": "packages/validator"
   },
-  "homepage": "https://github.com/pageskim/pageskim#readme",
+  "homepage": "https://github.com/venki0552/PageSkim#readme",
   "bugs": {
-    "url": "https://github.com/pageskim/pageskim/issues"
+    "url": "https://github.com/venki0552/PageSkim/issues"
   },
   "keywords": [
     "llm",

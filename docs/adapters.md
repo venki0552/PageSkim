@@ -68,7 +68,7 @@ each `index.html`.
 ```yaml
 # .github/workflows/pages.yml (excerpt)
 - run: bundle exec jekyll build
-- uses: pageskim/pageskim/.github/action@main
+- uses: venki0552/PageSkim/.github/action@main
   with:
     path: _site
     base-url: https://example.github.io

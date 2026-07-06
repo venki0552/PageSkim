@@ -17,7 +17,7 @@ export const runtime = "nodejs";
 const limiter = new RateLimiter(20);
 const MAX_BYTES = 5 * 1024 * 1024;
 const FETCH_TIMEOUT_MS = 10_000;
-const USER_AGENT = "PageSkimBot/0.1 (+https://github.com/pageskim/pageskim)";
+const USER_AGENT = "PageSkimBot/0.1 (+https://github.com/venki0552/PageSkim)";
 
 const CORS = {
   "Access-Control-Allow-Origin": "*",

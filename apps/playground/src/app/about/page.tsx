@@ -60,18 +60,18 @@ export default function About() {
         This playground doubles as a free conversion API — <code>POST /api/convert</code> with{" "}
         <code>{'{"html": "..."}'}</code> or <code>{'{"url": "https://..."}'}</code>. Rate-limited,
         CORS-open, nothing stored. Details in the{" "}
-        <a href="https://github.com/pageskim/pageskim#playground-api">repository README</a>.
+        <a href="https://github.com/venki0552/PageSkim#playground-api">repository README</a>.
       </p>
 
       <h2>Links</h2>
       <ul>
         <li>
-          <a href="https://github.com/pageskim/pageskim/blob/main/spec/SPEC.md">
+          <a href="https://github.com/venki0552/PageSkim/blob/main/spec/SPEC.md">
             Format spec v0.1
           </a>
         </li>
         <li>
-          <a href="https://github.com/pageskim/pageskim">GitHub — spec, CLI, SDK, benchmarks</a>
+          <a href="https://github.com/venki0552/PageSkim">GitHub — spec, CLI, SDK, benchmarks</a>
         </li>
         <li>
           <code>npx pageskim generate your-site/</code> to make your own site agent-readable
@@ -82,7 +82,7 @@ export default function About() {
       <p>
         <a
           className="deploy-btn"
-          href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fpageskim%2Fpageskim&project-name=pageskim-playground&root-directory=apps%2Fplayground"
+          href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvenki0552%2FPageSkim&project-name=pageskim-playground&root-directory=apps%2Fplayground"
         >
           ▲ Deploy this playground to Vercel
         </a>

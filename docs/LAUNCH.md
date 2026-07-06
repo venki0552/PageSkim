@@ -3,14 +3,14 @@
 ## Pre-launch checklist
 
 ### Names & accounts
-- [ ] Create the GitHub org `pageskim` and push this repo (`pageskim/pageskim`); rechecked availability before claiming (was free 2026-07-04).
+- [x] Publish the repo — done: [`venki0552/PageSkim`](https://github.com/venki0552/PageSkim) (2026-07-05). All in-repo URLs point there; if it later moves to a `pageskim` org, GitHub redirects old links but re-run the URL sweep anyway.
 - [ ] Claim npm: publish `pageskim`, `@pageskim/core`, `@pageskim/generator`, `@pageskim/validator` (dry-runs pass; `npm publish --access public` per package, core first).
 - [ ] Register `pageskim.dev` (free as of 2026-07-04); point at the playground.
 - [ ] Quick USPTO/EUIPO trademark search for "pageskim".
 
 ### Repo polish
 - [ ] Record the hero GIF: playground converting Wikipedia's Lighthouse of Alexandria (142,687 → 7,625 → 165 tokens); save as `docs/hero.gif`, un-comment the README slot.
-- [ ] Replace `github.com/pageskim/pageskim` placeholder URLs if the org name changes (README, About page, SDK README, UA string in `apps/playground/src/app/api/convert/route.ts`, `bench/pageskim_bench/wikipedia.py`).
+- [ ] Replace `github.com/venki0552/PageSkim` placeholder URLs if the org name changes (README, About page, SDK README, UA string in `apps/playground/src/app/api/convert/route.ts`, `bench/pageskim_bench/wikipedia.py`).
 - [ ] Run the real benchmark (`--provider anthropic --articles 10`, needs `ANTHROPIC_API_KEY`; ~$1–5) and replace the proxy numbers in README + About page with real ones. Commit `bench/results/results.json`.
 - [ ] Tag `v0.1.0`; spec CHANGELOG entry finalized (done).
 

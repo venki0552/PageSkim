@@ -1,6 +1,6 @@
 # @pageskim/core
 
-The pure, isomorphic conversion library for the [PageSkim format](https://github.com/pageskim/pageskim/blob/main/spec/SPEC.md): parse HTML → extract content → emit `page.llm.md` / `page.llm.json` siblings that LLMs and agents read at 10–50x fewer tokens.
+The pure, isomorphic conversion library for the [PageSkim format](https://github.com/venki0552/PageSkim/blob/main/spec/SPEC.md): parse HTML → extract content → emit `page.llm.md` / `page.llm.json` siblings that LLMs and agents read at 10–50x fewer tokens.
 
 Everything else — the [`pageskim` CLI/SDK](https://www.npmjs.com/package/pageskim), the playground, the GitHub Action — is a thin wrapper around this package, so conversion output is byte-identical everywhere.
 
@@ -27,4 +27,4 @@ Guarantees:
 - **Deterministic** — same input → byte-identical output, with or without the tokenizer (spec §9's budget metric governs all content-affecting decisions).
 - The heavy o200k tokenizer lives behind the `@pageskim/core/tokenizer` subpath so browser bundles stay small; without it, token *reports* use a labeled bytes/4 estimate while output bytes are unchanged.
 
-Docs: [format spec](https://github.com/pageskim/pageskim/blob/main/spec/SPEC.md) · [publisher guide](https://github.com/pageskim/pageskim/blob/main/docs/integration.md) · [consumer guide](https://github.com/pageskim/pageskim/blob/main/docs/consuming.md). MIT.
+Docs: [format spec](https://github.com/venki0552/PageSkim/blob/main/spec/SPEC.md) · [publisher guide](https://github.com/venki0552/PageSkim/blob/main/docs/integration.md) · [consumer guide](https://github.com/venki0552/PageSkim/blob/main/docs/consuming.md). MIT.

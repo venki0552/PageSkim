@@ -6,7 +6,7 @@ import urllib.request
 from pathlib import Path
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
-USER_AGENT = "PageSkimBench/0.1 (+https://github.com/pageskim/pageskim)"
+USER_AGENT = "PageSkimBench/0.1 (+https://github.com/venki0552/PageSkim)"
 
 
 def fetch_article_html(title: str, data_dir: Path | None = None) -> str:

@@ -82,7 +82,7 @@ always matches the HTML.
 - Add validation to CI so a drifted or hand-edited sibling fails the build:
 
   ```yaml
-  - uses: pageskim/pageskim/.github/action@main
+  - uses: venki0552/PageSkim/.github/action@main
     with:
       path: dist
       base-url: https://your-site.com

@@ -1,6 +1,6 @@
 # PageSkim
 
-[![CI](https://img.shields.io/github/actions/workflow/status/pageskim/pageskim/ci.yml?label=CI)](https://github.com/pageskim/pageskim/actions)
+[![CI](https://img.shields.io/github/actions/workflow/status/venki0552/PageSkim/ci.yml?label=CI)](https://github.com/venki0552/PageSkim/actions)
 [![npm](https://img.shields.io/badge/npm-pageskim%400.1.0-blue)](https://www.npmjs.com/package/pageskim)
 [![spec](https://img.shields.io/badge/spec-v0.1-8a2be2)](spec/SPEC.md)
 [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE)

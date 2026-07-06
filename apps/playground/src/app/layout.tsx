@@ -25,7 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <nav aria-label="Site">
             <Link href="/">Convert</Link>
             <Link href="/about">About</Link>
-            <a href="https://github.com/pageskim/pageskim" rel="noopener">
+            <a href="https://github.com/venki0552/PageSkim" rel="noopener">
               GitHub
             </a>
             <button
